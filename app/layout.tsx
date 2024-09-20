@@ -1,12 +1,12 @@
-import './globals.css'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import "./globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "My Portfolio",
+    default: "Chirag Dalmia",
     template: "%s | My Portfolio",
   },
   description: "A showcase of my work and skills as a Front-end developer",
@@ -30,19 +30,26 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "My Portfolio",
+    title: "Chirag Dalmia",
     description: "A showcase of my work and skills as a web developer",
     url: "https://portfolio-zeta-ten-70.vercel.app",
-    images: ["/images/banner.png"],
     siteName: "My Portfolio",
+    images: [
+      {
+        url: "https://portfolio-zeta-ten-70.vercel.app/images/banner.png",
+        width: 1200,
+        height: 630,
+        alt: "Chirag Dalmia's Portfolio",
+      },
+    ],
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "My Portfolio",
+    title: "Chirag Dalmia | My Portfolio",
     description: "A showcase of my work and skills as a web developer",
-    images: ["/images/banner.png"],
+    images: ["https://portfolio-zeta-ten-70.vercel.app/images/banner.png"],
     creator: "@chiragdalmia007",
   },
   robots: {
@@ -56,18 +63,29 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  icons: {
+    icon: [{ url: "/favicon.ico", sizes: "any" }],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180" }],
+  },
+  viewport: "width=device-width, initial-scale=1",
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} min-h-screen bg-background text-foreground`}>
+      <head>
+        <link rel="canonical" href="https://portfolio-zeta-ten-70.vercel.app" />
+      </head>
+      <body
+        className={`${inter.className} min-h-screen bg-background text-foreground`}
+      >
         {children}
       </body>
     </html>
-  )
+  );
 }
