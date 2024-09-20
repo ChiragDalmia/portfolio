@@ -1,4 +1,3 @@
-// config.ts
 import type { Metadata } from "next";
 
 const siteUrl = "https://portfolio-zeta-ten-70.vercel.app";
@@ -13,6 +12,11 @@ export const siteConfig = {
   links: {
     twitter: "https://twitter.com/chiragdalmia007",
   },
+};
+
+const getImageUrl = (title: string) => {
+  const encodedTitle = encodeURIComponent(title);
+  return `${siteUrl}/api/og?title=${encodedTitle}`;
 };
 
 export const metadataConfig: Metadata = {
@@ -62,10 +66,16 @@ export const metadataConfig: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: `${siteUrl}/og?title=${encodeURIComponent(siteConfig.name)}`,
+        url: getImageUrl(siteConfig.name),
         width: 1200,
-        height: 600,
+        height: 630,
         alt: `${siteConfig.name}'s Portfolio`,
+      },
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name}'s Portfolio Fallback`,
       },
     ],
     locale: "en_US",
@@ -77,10 +87,16 @@ export const metadataConfig: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: `${siteUrl}/og?title=${encodeURIComponent(siteConfig.name)}`,
+        url: getImageUrl(siteConfig.name),
         width: 1200,
-        height: 600,
+        height: 630,
         alt: `${siteConfig.name}'s Portfolio`,
+      },
+      {
+        url: siteConfig.twitterImage,
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name}'s Portfolio Fallback`,
       },
     ],
     creator: "@chiragdalmia007",

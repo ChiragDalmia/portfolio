@@ -7,6 +7,10 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const title = searchParams.get("title") || "Chirag Dalmia";
 
+  // Set cache control headers
+  const headers = new Headers();
+  headers.set("Cache-Control", "s-maxage=3600, stale-while-revalidate");
+
   return new ImageResponse(
     (
       <div
@@ -52,7 +56,7 @@ export async function GET(req: NextRequest) {
     {
       width: 1200,
       height: 630,
-      
+      headers: headers,
     }
   );
 }
