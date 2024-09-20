@@ -10,7 +10,13 @@ export const metadata: Metadata = {
     template: "%s | My Portfolio",
   },
   description: "A showcase of my work and skills as a Front-end developer",
-  keywords: ["portfolio", "web development", "react", "next.js","frontend developer"],
+  keywords: [
+    "portfolio",
+    "web development",
+    "react",
+    "next.js",
+    "frontend developer",
+  ],
   authors: [{ name: "Chirag Dalmia" }],
   creator: "Chirag Dalmia",
   publisher: "Chirag Dalmia",
@@ -26,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "My Portfolio",
     description: "A showcase of my work and skills as a web developer",
-    url: "https://portfolio-zeta-ten-70.vercel.app/",
+    url: "https://portfolio-zeta-ten-70.vercel.app/og-image.png",
     siteName: "My Portfolio",
     locale: "en_US",
     type: "website",
@@ -35,6 +41,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "My Portfolio",
     description: "A showcase of my work and skills as a web developer",
+    images: ["https://portfolio-zeta-ten-70.vercel.app/twitter-image.png"],
     creator: "@chiragdalmia007",
   },
   robots: {
