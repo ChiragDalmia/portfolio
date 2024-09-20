@@ -32,7 +32,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "My Portfolio",
     description: "A showcase of my work and skills as a web developer",
-    url: "https://portfolio-zeta-ten-70.vercel.app/og-image.png",
+    url: "https://portfolio-zeta-ten-70.vercel.app",
+    images: ["https://portfolio-zeta-ten-70.vercel.app/og-image.png"],
     siteName: "My Portfolio",
     locale: "en_US",
     type: "website",
