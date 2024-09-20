@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     title: "My Portfolio",
     description: "A showcase of my work and skills as a web developer",
     url: "https://portfolio-zeta-ten-70.vercel.app",
-    images: ["https://portfolio-zeta-ten-70.vercel.app/og-image.png"],
+    images: ["/images/banner.png"],
     siteName: "My Portfolio",
     locale: "en_US",
     type: "website",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "My Portfolio",
     description: "A showcase of my work and skills as a web developer",
-    images: ["https://portfolio-zeta-ten-70.vercel.app/twitter-image.png"],
+    images: ["/images/banner.png"],
     creator: "@chiragdalmia007",
   },
   robots: {
