@@ -14,11 +14,6 @@ export const siteConfig = {
   },
 };
 
-const getImageUrl = (title: string) => {
-  const encodedTitle = encodeURIComponent(title);
-  return `${siteUrl}/api/og?title=${encodedTitle}`;
-};
-
 export const metadataConfig: Metadata = {
   title: {
     default: siteConfig.name,
@@ -66,12 +61,6 @@ export const metadataConfig: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: getImageUrl(siteConfig.name),
-        width: 1200,
-        height: 630,
-        alt: `${siteConfig.name}'s Portfolio`,
-      },
-      {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
@@ -86,12 +75,6 @@ export const metadataConfig: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     images: [
-      {
-        url: getImageUrl(siteConfig.name),
-        width: 1200,
-        height: 630,
-        alt: `${siteConfig.name}'s Portfolio`,
-      },
       {
         url: siteConfig.twitterImage,
         width: 1200,
