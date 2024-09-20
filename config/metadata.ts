@@ -9,7 +9,7 @@ export const siteConfig = {
     "Front-end Developer | Crafting clean, efficient, and impactful digital experiences.",
   url: siteUrl,
   ogImage: `${siteUrl}/images/banner.png`,
-  twitterImage: `${siteUrl}/images/twitter-banner.png`,
+  twitterImage: `${siteUrl}/images/banner.png`,
   links: {
     twitter: "https://twitter.com/chiragdalmia007",
   },
@@ -64,7 +64,7 @@ export const metadataConfig: Metadata = {
       {
         url: siteConfig.ogImage,
         width: 1200,
-        height: 630,
+        height: 600,
         alt: `${siteConfig.name}'s Portfolio`,
       },
     ],
