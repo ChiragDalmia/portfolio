@@ -49,7 +49,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Chirag Dalmia | My Portfolio",
     description: "A showcase of my work and skills as a web developer",
-    images: ["https://portfolio-zeta-ten-70.vercel.app/images/banner.png"],
+    images: [
+      {
+        url: "https://portfolio-zeta-ten-70.vercel.app/images/twitter-banner.png",
+        width: 1200,
+        height: 600,
+        alt: "Chirag Dalmia's Portfolio",
+      },
+    ],
     creator: "@chiragdalmia007",
   },
   robots: {
