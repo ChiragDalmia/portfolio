@@ -62,7 +62,7 @@ export const metadataConfig: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: siteConfig.ogImage,
+        url: `${siteUrl}/og?title=${encodeURIComponent(siteConfig.name)}`,
         width: 1200,
         height: 600,
         alt: `${siteConfig.name}'s Portfolio`,
@@ -77,7 +77,7 @@ export const metadataConfig: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: siteConfig.twitterImage,
+        url: `${siteUrl}/og?title=${encodeURIComponent(siteConfig.name)}`,
         width: 1200,
         height: 600,
         alt: `${siteConfig.name}'s Portfolio`,
