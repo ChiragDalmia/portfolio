@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: "%s | My Portfolio",
   },
   description: "A showcase of my work and skills as a web developer",
-  keywords: ["portfolio", "web development", "react", "next.js"],
+  keywords: ["portfolio", "web development", "react", "next.js","frontend developer"],
   authors: [{ name: "Chirag Dalmia" }],
   creator: "Chirag Dalmia",
   publisher: "Chirag Dalmia",
