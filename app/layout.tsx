@@ -1,32 +1,68 @@
 import "./globals.css";
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { metadataConfig } from "@/config/metadata";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = metadataConfig;
-
-export const viewport = {
-  width: "device-width",
-  initialScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
-  ],
+export const metadata: Metadata = {
+  metadataBase: new URL("https://chiragdalmia.io"),
+  alternates: {
+    canonical: "/",
+  },
+  title: {
+    default: "Chirag Dalmia",
+    template: "%s | Chirag Dalmia",
+  },
+  description:
+    "Front-end Developer | Crafting clean, efficient, and impactful digital experiences.",
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html lang="en">
-      <body
-        className={`${inter.className} min-h-screen bg-background text-foreground`}
+      <html
+        lang="en"
+        className={`${inter.className} [scrollbar-gutter:stable]`}
       >
-        {children}
-      </body>
-    </html>
+        <body className="antialiased tracking-tight">
+          <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-8">
+            <main className="max-w-[60ch] mx-auto w-full space-y-6">
+              {children}
+            </main>
+            <Footer />
+            <Analytics />
+          </div>
+        </body>
+      </html>
+  );
+}
+
+function Footer() {
+  const links = [
+    { name: "@dotchirag", url: "https://x.com/dotchirag" },
+    { name: "linkedin", url: "https://www.linkedin.com/in/chiragdalmia007" },
+    { name: "github", url: "https://github.com/chiragdalmia" },
+  ];
+
+  return (
+    <footer className="mt-12 text-center">
+      <div className="flex justify-center space-x-4 tracking-tight">
+        {links.map((link) => (
+          <a
+            key={link.name}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-blue-500 transition-colors duration-200"
+          >
+            {link.name}
+          </a>
+        ))}
+      </div>
+    </footer>
   );
 }

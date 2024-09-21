@@ -17,7 +17,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 @layer utilities {
@@ -87,6 +87,6 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground text-xl;
+    @apply bg-background text-foreground;
   }
 }
