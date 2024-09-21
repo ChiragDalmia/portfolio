@@ -15,6 +15,7 @@ export const siteConfig = {
 };
 
 export const metadataConfig: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,
@@ -50,38 +51,30 @@ export const metadataConfig: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(siteConfig.url),
   alternates: {
     canonical: "/",
   },
   openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteConfig.url,
     title: siteConfig.name,
     description: siteConfig.description,
-    url: siteConfig.url,
     siteName: siteConfig.name,
     images: [
       {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name}'s Portfolio Fallback`,
+        alt: `${siteConfig.name}'s Portfolio`,
       },
     ],
-    locale: "en_US",
-    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: [
-      {
-        url: siteConfig.twitterImage,
-        width: 1200,
-        height: 630,
-        alt: `${siteConfig.name}'s Portfolio Fallback`,
-      },
-    ],
+    images: [siteConfig.twitterImage],
     creator: "@chiragdalmia007",
   },
   robots: {
@@ -97,7 +90,6 @@ export const metadataConfig: Metadata = {
   },
   icons: {
     icon: [{ url: "/favicon.ico", sizes: "any" }],
-    apple: [{ url: "/apple-icon.png", sizes: "180x180" }],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
   },
-  // Remove viewport and themeColor from here
 };

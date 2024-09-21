@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { metadataConfig, siteConfig } from "@/config/metadata";
+import { metadataConfig } from "@/config/metadata";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,9 +22,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="canonical" href={siteConfig.url} />
-      </head>
       <body
         className={`${inter.className} min-h-screen bg-background text-foreground`}
       >
