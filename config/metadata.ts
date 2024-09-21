@@ -99,6 +99,5 @@ export const metadataConfig: Metadata = {
     icon: [{ url: "/favicon.ico", sizes: "any" }],
     apple: [{ url: "/apple-icon.png", sizes: "180x180" }],
   },
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#ffffff",
+  // Remove viewport and themeColor from here
 };
