@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,20 +25,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <html
-        lang="en"
-        className={`${inter.className} [scrollbar-gutter:stable]`}
-      >
-        <body className="antialiased tracking-tight">
-          <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-8">
-            <main className="max-w-[60ch] mx-auto w-full space-y-6">
-              {children}
-            </main>
-            <Footer />
-            <Analytics />
-          </div>
-        </body>
-      </html>
+    <html lang="en" className={`${inter.className} [scrollbar-gutter:stable]`}>
+      <body className="antialiased tracking-tight">
+        <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-8">
+          <main className="max-w-[60ch] mx-auto w-full space-y-6">
+            {children}
+          </main>
+          <Footer />
+          <Analytics />
+        </div>
+      </body>
+    </html>
   );
 }
 
@@ -52,7 +50,7 @@ function Footer() {
     <footer className="mt-12 text-center">
       <div className="flex justify-center space-x-4 tracking-tight">
         {links.map((link) => (
-          <a
+          <Link
             key={link.name}
             href={link.url}
             target="_blank"
@@ -60,8 +58,19 @@ function Footer() {
             className="text-gray-400 hover:text-blue-500 transition-colors duration-200"
           >
             {link.name}
-          </a>
+          </Link>
         ))}
+      </div>
+      <div className="mt-6 text-xs">
+        Portfolio Inspired By{" "}
+        <Link
+          href="https://leerob.io"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-gray-400"
+        >
+          Lee Rob
+        </Link>
       </div>
     </footer>
   );
