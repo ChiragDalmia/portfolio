@@ -39,15 +39,19 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Rate limit exceeded" }, { status: 429 });
   }
 
-  const { slug } = await request.json();
-  if (!slug)
-    return NextResponse.json({ error: "Slug is required" }, { status: 400 });
+  const { slug, increment } = await request.json();
+  if (!slug || typeof increment !== "number") {
+    return NextResponse.json(
+      { error: "Slug and increment are required" },
+      { status: 400 }
+    );
+  }
 
   await sql`
     INSERT INTO likes (slug, count)
-    VALUES (${slug}, 1)
+    VALUES (${slug}, ${increment})
     ON CONFLICT (slug)
-    DO UPDATE SET count = likes.count + 1
+    DO UPDATE SET count = likes.count + ${increment}
   `;
 
   const result = await sql`SELECT count FROM likes WHERE slug = ${slug}`;
