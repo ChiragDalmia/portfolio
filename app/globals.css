@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -12,24 +10,19 @@
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
+    --primary: 210 100% 50%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 210 40% 9%;
     --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
+    --muted-foreground: 210 40% 45.1%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 210 40% 9%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    --border: 210 40% 89.8%;
+    --input: 210 40% 89.8%;
+    --ring: 210 100% 50%;
     --radius: 0.5rem;
   }
 
@@ -49,52 +42,59 @@
     --accent: 0 0% 14.9%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --destructive-foreground: 120 100% 95%;
+    --border: 120 30% 20%;
+    --input: 120 30% 20%;
+    --ring: 120 100% 50%;
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground leading-relaxed;
   }
 
-  /* Typography */
+  /* Dark Mode Selection */
+  .dark ::selection {
+    @apply bg-[#122e2e] text-[#68d1bf];
+  }
+
+  /* Light Mode Selection */
+  ::selection {
+    @apply bg-[#e6f3ff] text-[#0066cc];
+  }
+
+  /* Typography for Headings */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply mt-6 mb-2 leading-tight text-lg text-foreground;
+    @apply mt-6 mb-2 leading-tight font-medium text-foreground;
   }
 
-
-  p,
-  ul,
-  ol,
-  dl,
-  table {
-    @apply mb-4 text-foreground;
+  /* Navigation */
+  ul li,
+  ol li {
+    @apply ml-4;
   }
 
   /* Links */
   a {
-    @apply text-primary no-underline;
+    @apply text-blue-500 hover:text-blue-700 no-underline transition-colors duration-200;
   }
 
-  a:hover {
-    @apply underline;
+  .dark a {
+    @apply text-green-500 hover:text-green-700;
+  }
+
+  /* Typography for Content */
+  p,
+  ul,
+  ol {
+    @apply mb-4 text-foreground leading-relaxed;
   }
 
   /* Emphasis */
@@ -108,64 +108,45 @@
     @apply italic;
   }
 
-  /* Quotes */
-  blockquote {
-    @apply my-4 pl-4 border-l-4 border-muted text-muted-foreground;
+  /* Highlight */
+  mark {
+    @apply bg-blue-200 text-blue-900 px-1 rounded-md;
   }
 
-  /* Code */
-  code {
-    @apply font-mono bg-muted px-1 py-0.5 rounded text-foreground;
+  .dark mark {
+    @apply bg-green-900 text-green-200
   }
 
-  pre {
-    @apply bg-muted p-4 overflow-x-auto rounded text-foreground;
+  /* Small Text */
+  small {
+    @apply text-sm text-muted-foreground;
   }
 
-  /* Lists */
-  ul,
-  ol {
-    @apply pl-8;
+  /* Abbreviations */
+  abbr {
+    @apply relative text-primary cursor-help no-underline;
   }
 
-  dl dt {
-    @apply font-bold;
+  abbr::after {
+    @apply absolute left-1/2 top-full -translate-x-1/2 bg-muted text-muted-foreground px-2 py-1 rounded text-sm whitespace-nowrap opacity-0 scale-0 invisible transition-all duration-300 z-10;
+    content: attr(data-tooltip);
   }
 
-  dl dd {
-    @apply ml-4 mb-2;
+  abbr:hover::after {
+    @apply opacity-100 visible scale-100;
   }
 
-  /* Figures and Images */
-  figure {
-    @apply my-4;
+  /* Inserted and Deleted Text */
+  ins {
+    @apply text-blue-900 no-underline;
   }
 
-  figcaption {
-    @apply italic text-center text-muted-foreground;
+  .dark ins {
+    @apply text-green-900;
   }
 
-  img {
-    @apply max-w-full h-auto;
-  }
-
-  /* Tables */
-  table {
-    @apply w-full border-collapse;
-  }
-
-  th,
-  td {
-    @apply border border-border p-2 text-left;
-  }
-
-  th {
-    @apply bg-muted;
-  }
-
-  /* Horizontal Rule */
-  hr {
-    @apply border-t border-border my-8;
+  del {
+    @apply line-through;
   }
 
   /* Superscript and Subscript */
@@ -182,51 +163,161 @@
     @apply bottom-[-0.25em];
   }
 
-  /* Highlight */
-  mark {
-    @apply bg-yellow-200 px-1 dark:bg-yellow-800 dark:text-yellow-200;
+  /* Code */
+  code {
+    @apply font-mono bg-muted px-1.5 py-0.5 rounded-md text-sm text-foreground;
   }
 
-  /* Abbreviations */
-  abbr {
-    @apply border-b border-dotted border-muted-foreground cursor-help;
+  /* Quotes */
+  blockquote {
+    @apply my-6 pl-6 border-l-4 border-muted text-muted-foreground italic;
   }
 
-  /* Small Text */
-  small {
-    @apply text-sm text-muted-foreground;
+  /* Preformatted Text */
+  pre {
+    @apply bg-muted p-4 overflow-x-auto rounded-md text-sm leading-relaxed my-4;
   }
 
-  /* Inserted and Deleted Text */
-  ins {
-    @apply bg-green-100 no-underline dark:bg-green-900;
+  /* Figures and Images */
+  figure {
+    @apply my-6 rounded-md;
   }
 
-  del {
-    @apply bg-red-100 line-through dark:bg-red-900;
+  figcaption {
+    @apply italic text-center text-sm text-muted-foreground mt-2;
+  }
+
+  img {
+    @apply max-w-full mx-auto h-auto rounded-md;
+  }
+
+  /* Description Lists */
+  dl dt {
+    @apply mb-1;
+  }
+
+  dl dd {
+    @apply ml-4;
+  }
+
+  /* Tables */
+  table {
+    @apply w-full border-collapse mb-6;
+  }
+
+  th,
+  td {
+    @apply border border-border p-2 text-left;
+  }
+
+  th {
+    @apply bg-muted font-semibold;
+  }
+
+  /* Horizontal Rule */
+  hr {
+    @apply h-[2px] bg-border rounded-full;
   }
 
   /* Structure */
-  header,
-  footer,
-  nav,
-  aside,
   section {
-    @apply mb-4;
+    @apply mb-6;
   }
 
   article {
-    @apply border-b border-border pb-4 mb-4;
+    @apply border-b border-border pb-6 mb-6;
   }
 
-  /* Navigation */
-  nav ul {
-    @apply list-none p-0;
-  }
+/* Media Element Styles */
 
-  nav ul li {
-    @apply inline-block mr-4;
+/* Base styles for both audio and video */
+audio,
+video {
+  @apply w-full max-w-2xl mx-auto my-4 rounded-lg overflow-hidden;
+}
+
+/* Video-specific styles */
+video {
+  @apply aspect-video object-cover;
+}
+
+/* Audio-specific styles */
+audio {
+  @apply h-12 bg-secondary rounded-full object-cover;
+}
+
+/* Custom controls for better visual integration */
+audio::-webkit-media-controls,
+video::-webkit-media-controls {
+  @apply bg-transparent;
+}
+
+audio::-webkit-media-controls-panel,
+video::-webkit-media-controls-panel {
+  @apply bg-secondary border-none;
+}
+
+audio::-webkit-media-controls-play-button,
+video::-webkit-media-controls-play-button {
+  @apply text-foreground hover:text-primary transition-colors;
+}
+
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display,
+video::-webkit-media-controls-current-time-display,
+video::-webkit-media-controls-time-remaining-display {
+  @apply text-foreground/90 text-sm;
+}
+
+audio::-webkit-media-controls-volume-slider,
+video::-webkit-media-controls-volume-slider {
+  @apply accent-primary;
+}
+
+audio::-webkit-media-controls-mute-button,
+video::-webkit-media-controls-mute-button {
+  @apply text-foreground hover:text-primary transition-colors;
+}
+
+audio::-webkit-media-controls-timeline,
+video::-webkit-media-controls-timeline {
+  @apply accent-primary;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+
+  audio,
+  video {
+    @apply max-w-full rounded-md;
   }
+}
+
+/* Accessibility enhancements */
+audio:focus,
+video:focus {
+  @apply outline-none;
+}
+
+/* Captions and subtitles */
+video::cue {
+  @apply bg-background/75 text-foreground font-medium px-1 py-0.5 rounded;
+}
+
+/* Loading state */
+.media-loading {
+  @apply animate-pulse bg-muted;
+}
+
+/* Error state */
+.media-error {
+  @apply border border-destructive bg-destructive/10 text-destructive p-4 rounded-lg text-center;
+}
+
+/* Fullscreen mode */
+video:fullscreen {
+  @apply w-screen h-screen max-w-none mx-0 my-0;
+}
 }
 
 @layer utilities {
