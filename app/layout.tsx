@@ -61,13 +61,12 @@ function Footer() {
           </Link>
         ))}
       </div>
-      <div className="mt-6 text-xs">
+      <div className="mt-6 text-xs text-gray-400">
         Portfolio Inspired By{" "}
         <Link
           href="https://leerob.io"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-gray-400"
         >
           Lee Rob
         </Link>
