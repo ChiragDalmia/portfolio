@@ -2,29 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: 'Inter', sans-serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
 
 @layer base {
   :root {
@@ -54,6 +32,7 @@ body {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -88,5 +67,170 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Typography */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply mt-6 mb-2 leading-tight text-lg text-foreground;
+  }
+
+
+  p,
+  ul,
+  ol,
+  dl,
+  table {
+    @apply mb-4 text-foreground;
+  }
+
+  /* Links */
+  a {
+    @apply text-primary no-underline;
+  }
+
+  a:hover {
+    @apply underline;
+  }
+
+  /* Emphasis */
+  strong,
+  b {
+    @apply font-bold;
+  }
+
+  em,
+  i {
+    @apply italic;
+  }
+
+  /* Quotes */
+  blockquote {
+    @apply my-4 pl-4 border-l-4 border-muted text-muted-foreground;
+  }
+
+  /* Code */
+  code {
+    @apply font-mono bg-muted px-1 py-0.5 rounded text-foreground;
+  }
+
+  pre {
+    @apply bg-muted p-4 overflow-x-auto rounded text-foreground;
+  }
+
+  /* Lists */
+  ul,
+  ol {
+    @apply pl-8;
+  }
+
+  dl dt {
+    @apply font-bold;
+  }
+
+  dl dd {
+    @apply ml-4 mb-2;
+  }
+
+  /* Figures and Images */
+  figure {
+    @apply my-4;
+  }
+
+  figcaption {
+    @apply italic text-center text-muted-foreground;
+  }
+
+  img {
+    @apply max-w-full h-auto;
+  }
+
+  /* Tables */
+  table {
+    @apply w-full border-collapse;
+  }
+
+  th,
+  td {
+    @apply border border-border p-2 text-left;
+  }
+
+  th {
+    @apply bg-muted;
+  }
+
+  /* Horizontal Rule */
+  hr {
+    @apply border-t border-border my-8;
+  }
+
+  /* Superscript and Subscript */
+  sup,
+  sub {
+    @apply text-xs align-baseline;
+  }
+
+  sup {
+    @apply top-[-0.5em];
+  }
+
+  sub {
+    @apply bottom-[-0.25em];
+  }
+
+  /* Highlight */
+  mark {
+    @apply bg-yellow-200 px-1 dark:bg-yellow-800 dark:text-yellow-200;
+  }
+
+  /* Abbreviations */
+  abbr {
+    @apply border-b border-dotted border-muted-foreground cursor-help;
+  }
+
+  /* Small Text */
+  small {
+    @apply text-sm text-muted-foreground;
+  }
+
+  /* Inserted and Deleted Text */
+  ins {
+    @apply bg-green-100 no-underline dark:bg-green-900;
+  }
+
+  del {
+    @apply bg-red-100 line-through dark:bg-red-900;
+  }
+
+  /* Structure */
+  header,
+  footer,
+  nav,
+  aside,
+  section {
+    @apply mb-4;
+  }
+
+  article {
+    @apply border-b border-border pb-4 mb-4;
+  }
+
+  /* Navigation */
+  nav ul {
+    @apply list-none p-0;
+  }
+
+  nav ul li {
+    @apply inline-block mr-4;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
   }
 }
