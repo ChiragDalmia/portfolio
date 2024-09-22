@@ -1,60 +1,107 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
-export default function LikeButton({ slug }: { slug: string }) {
-  const [likes, setLikes] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+interface LikeCounterProps {
+  slug: string;
+}
 
-  const fetchLikes = async () => {
-    try {
-      const response = await fetch(
-        `/api/likes?slug=${encodeURIComponent(slug)}`
-      );
-      if (!response.ok) throw new Error("Failed to fetch likes");
-      const data = await response.json();
-      setLikes(data.likes);
-    } catch (err) {
-      setError("Failed to fetch likes");
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-  useEffect(() => {
-    fetchLikes();
+interface LikeState {
+  count: number;
+  localCount: number;
+  isLoading: boolean;
+  error: string | null;
+}
+
+interface LikeResponse {
+  count: number;
+}
+
+export default function LikeCounter({ slug }: LikeCounterProps) {
+  const [state, setState] = useState<LikeState>({
+    count: 0,
+    localCount: 0,
+    isLoading: false,
+    error: null,
   });
+  const { count, localCount, isLoading, error } = state;
 
-  const handleLike = async () => {
-    setIsLoading(true);
+  const fetchCount = useCallback(async () => {
     try {
-      const response = await fetch(
-        `/api/likes?slug=${encodeURIComponent(slug)}`,
-        { method: "POST" }
-      );
-      if (!response.ok) throw new Error("Failed to update likes");
-      const data = await response.json();
-      setLikes(data.likes);
+      const res = await fetch(`/api/likes?slug=${encodeURIComponent(slug)}`);
+      if (!res.ok) throw new Error("Failed to fetch like count");
+      const data: LikeResponse = await res.json();
+      setState((s) => ({ ...s, count: data.count, localCount: 0 }));
     } catch (err) {
-      setError("Failed to update likes");
-      console.log(err);
-    } finally {
-      setIsLoading(false);
+      console.error("Error fetching like count:", err);
+      setState((s) => ({ ...s, error: "Failed to load like count" }));
     }
-  };
+  }, [slug]);
 
-  if (error) {
-    return <div className="text-red-500">{error}</div>;
-  }
+  useEffect(() => {
+    fetchCount();
+  }, [fetchCount]);
+
+  const updateLikes = useCallback(async () => {
+    if (localCount === 0) return;
+
+    setState((s) => ({ ...s, isLoading: true, error: null }));
+
+    try {
+      const res = await fetch("/api/likes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug, increment: localCount }),
+      });
+
+      if (!res.ok) {
+        throw new Error(
+          res.status === 429
+            ? "Rate limit exceeded. Please try again later."
+            : "Failed to update like count"
+        );
+      }
+
+      const data: LikeResponse = await res.json();
+      setState((s) => ({
+        ...s,
+        count: data.count,
+        localCount: 0,
+        isLoading: false,
+      }));
+    } catch (err) {
+      console.error("Error updating like count:", err);
+      setState((s) => ({
+        ...s,
+        error: err instanceof Error ? err.message : "An unknown error occurred",
+        isLoading: false,
+      }));
+    }
+  }, [slug, localCount]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (localCount > 0) {
+        updateLikes();
+      }
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [localCount, updateLikes]);
+
+  const handleLike = useCallback(() => {
+    setState((s) => ({
+      ...s,
+      localCount: s.localCount + 1,
+    }));
+  }, []);
 
   return (
-    <button
-      onClick={handleLike}
-      disabled={isLoading}
-      className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 disabled:opacity-50"
-    >
-      {isLoading ? "Loading..." : `Like (${likes})`}
-    </button>
+    <div>
+      <button onClick={handleLike} disabled={isLoading} aria-label="Like">
+        Like ({count + localCount})
+      </button>
+      {error && <p>{error}</p>}
+    </div>
   );
 }
