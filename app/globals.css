@@ -26,7 +26,7 @@
     --radius: 0.5rem;
   }
 
-  .dark {
+  :root.dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
@@ -50,13 +50,14 @@
 }
 
 @layer base {
+  /* The rest of your CSS remains unchanged */
 
-  body {
-    @apply bg-background text-foreground leading-relaxed;
+  html {
+    @apply bg-background text-foreground leading-relaxed transition-all duration-300;
   }
 
   /* Dark Mode Selection */
-  .dark ::selection {
+  :root.dark ::selection {
     @apply bg-[#122e2e] text-[#68d1bf];
   }
 
@@ -86,7 +87,7 @@
     @apply text-blue-500 hover:text-blue-700 no-underline transition-colors duration-200;
   }
 
-  .dark a {
+  :root.dark a {
     @apply text-green-500 hover:text-green-700;
   }
 
@@ -113,7 +114,7 @@
     @apply bg-blue-200 text-blue-900 px-1 rounded-md;
   }
 
-  .dark mark {
+  :root.dark mark {
     @apply bg-green-900 text-green-200
   }
 
@@ -141,7 +142,7 @@
     @apply text-blue-900 no-underline;
   }
 
-  .dark ins {
+  :root.dark ins {
     @apply text-green-900;
   }
 
@@ -228,96 +229,96 @@
     @apply border-b border-border pb-6 mb-6;
   }
 
-/* Media Element Styles */
+  /* Media Element Styles */
 
-/* Base styles for both audio and video */
-audio,
-video {
-  @apply w-full max-w-2xl mx-auto my-4 rounded-lg overflow-hidden;
-}
-
-/* Video-specific styles */
-video {
-  @apply aspect-video object-cover;
-}
-
-/* Audio-specific styles */
-audio {
-  @apply h-12 bg-secondary rounded-full object-cover;
-}
-
-/* Custom controls for better visual integration */
-audio::-webkit-media-controls,
-video::-webkit-media-controls {
-  @apply bg-transparent;
-}
-
-audio::-webkit-media-controls-panel,
-video::-webkit-media-controls-panel {
-  @apply bg-secondary border-none;
-}
-
-audio::-webkit-media-controls-play-button,
-video::-webkit-media-controls-play-button {
-  @apply text-foreground hover:text-primary transition-colors;
-}
-
-audio::-webkit-media-controls-current-time-display,
-audio::-webkit-media-controls-time-remaining-display,
-video::-webkit-media-controls-current-time-display,
-video::-webkit-media-controls-time-remaining-display {
-  @apply text-foreground/90 text-sm;
-}
-
-audio::-webkit-media-controls-volume-slider,
-video::-webkit-media-controls-volume-slider {
-  @apply accent-primary;
-}
-
-audio::-webkit-media-controls-mute-button,
-video::-webkit-media-controls-mute-button {
-  @apply text-foreground hover:text-primary transition-colors;
-}
-
-audio::-webkit-media-controls-timeline,
-video::-webkit-media-controls-timeline {
-  @apply accent-primary;
-}
-
-/* Responsive adjustments */
-@media (max-width: 640px) {
-
+  /* Base styles for both audio and video */
   audio,
   video {
-    @apply max-w-full rounded-md;
+    @apply w-full max-w-2xl mx-auto my-4 rounded-lg overflow-hidden;
   }
-}
 
-/* Accessibility enhancements */
-audio:focus,
-video:focus {
-  @apply outline-none;
-}
+  /* Video-specific styles */
+  video {
+    @apply aspect-video object-cover;
+  }
 
-/* Captions and subtitles */
-video::cue {
-  @apply bg-background/75 text-foreground font-medium px-1 py-0.5 rounded;
-}
+  /* Audio-specific styles */
+  audio {
+    @apply h-12 bg-secondary rounded-full object-cover;
+  }
 
-/* Loading state */
-.media-loading {
-  @apply animate-pulse bg-muted;
-}
+  /* Custom controls for better visual integration */
+  audio::-webkit-media-controls,
+  video::-webkit-media-controls {
+    @apply bg-transparent;
+  }
 
-/* Error state */
-.media-error {
-  @apply border border-destructive bg-destructive/10 text-destructive p-4 rounded-lg text-center;
-}
+  audio::-webkit-media-controls-panel,
+  video::-webkit-media-controls-panel {
+    @apply bg-secondary border-none;
+  }
 
-/* Fullscreen mode */
-video:fullscreen {
-  @apply w-screen h-screen max-w-none mx-0 my-0;
-}
+  audio::-webkit-media-controls-play-button,
+  video::-webkit-media-controls-play-button {
+    @apply text-foreground hover:text-primary transition-colors;
+  }
+
+  audio::-webkit-media-controls-current-time-display,
+  audio::-webkit-media-controls-time-remaining-display,
+  video::-webkit-media-controls-current-time-display,
+  video::-webkit-media-controls-time-remaining-display {
+    @apply text-foreground/90 text-sm;
+  }
+
+  audio::-webkit-media-controls-volume-slider,
+  video::-webkit-media-controls-volume-slider {
+    @apply accent-primary;
+  }
+
+  audio::-webkit-media-controls-mute-button,
+  video::-webkit-media-controls-mute-button {
+    @apply text-foreground hover:text-primary transition-colors;
+  }
+
+  audio::-webkit-media-controls-timeline,
+  video::-webkit-media-controls-timeline {
+    @apply accent-primary;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+
+    audio,
+    video {
+      @apply max-w-full rounded-md;
+    }
+  }
+
+  /* Accessibility enhancements */
+  audio:focus,
+  video:focus {
+    @apply outline-none;
+  }
+
+  /* Captions and subtitles */
+  video::cue {
+    @apply bg-background/75 text-foreground font-medium px-1 py-0.5 rounded;
+  }
+
+  /* Loading state */
+  .media-loading {
+    @apply animate-pulse bg-muted;
+  }
+
+  /* Error state */
+  .media-error {
+    @apply border border-destructive bg-destructive/10 text-destructive p-4 rounded-lg text-center;
+  }
+
+  /* Fullscreen mode */
+  video:fullscreen {
+    @apply w-screen h-screen max-w-none mx-0 my-0;
+  }
 }
 
 @layer utilities {

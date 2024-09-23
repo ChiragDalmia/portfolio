@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import Link from "next/link";
 import { Providers } from "@/components/providers";
+import ThemeToggle from "@/components/ThemeToggle";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +32,7 @@ export default function RootLayout({
       <body className="antialiased tracking-tight">
         <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-4">
           <main className="pt-12 max-w-[60ch] mx-auto w-full space-y-6">
+            <ThemeToggle />
             <Providers>{children}</Providers>
           </main>
           <Footer />
