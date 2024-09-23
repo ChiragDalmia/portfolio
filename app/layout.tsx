@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.className} [scrollbar-gutter:stable]`}>
       <body className="antialiased tracking-tight">
-        <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-8">
+        <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-4">
           <main className="pt-12 max-w-[60ch] mx-auto w-full space-y-6">
             {children}
           </main>
@@ -48,7 +48,7 @@ function Footer() {
 
   return (
     <footer className="mt-12 text-center">
-      <div className="flex justify-center space-x-4 tracking-tight">
+      <div className="flex justify-center items-end space-x-4 tracking-tight">
         {links.map((link) => (
           <Link
             key={link.name}
@@ -61,7 +61,7 @@ function Footer() {
           </Link>
         ))}
       </div>
-      <div className="mt-6 text-xs text-gray-400">
+      <div className="mt-4 text-xs text-gray-400">
         Portfolio Inspired By{" "}
         <Link
           href="https://leerob.io"

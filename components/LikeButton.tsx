@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 
+
 interface LikeCounterProps {
   slug: string;
 }
@@ -112,13 +113,23 @@ export default function LikeCounter({ slug }: LikeCounterProps) {
   }
 
   return (
-    <div>
-      {(count > 0 || localCount > 0) && (
-        <button onClick={handleLike} disabled={isLoading} aria-label="Like">
-           {count + localCount}
-        </button>
-      )}
-      {error && <p>{error}</p>}
+    <div className="absolute bottom-12 right-0">
+      <button
+        onClick={handleLike}
+        disabled={isLoading}
+        aria-label={`Like. Current count: ${count + localCount}`}
+        className="flex items-center"
+      >
+        <span
+          className={`mr-1 transition-all duration-300 text-2xl ${
+            localCount > 0 ? "text-red-500" : "text-gray-500"
+          }`}
+        >
+          {localCount > 0 ? "❤️" : "🤍"}
+        </span>
+        {count + localCount}
+      </button>
+      {error && <div>:P</div>}
     </div>
   );
 }
