@@ -3,16 +3,16 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 
 export function AuthStatus() {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
 
   if (status === "loading") {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   if (status === "unauthenticated") {
     return (
       <div>
-        Not signed in <br />
+       I hate signIn/signUps <br /> but you have to <br />
         <button onClick={() => signIn()}>Sign in</button>
       </div>
     );
@@ -20,7 +20,6 @@ export function AuthStatus() {
 
   return (
     <div>
-      Signed in as {session?.user?.username} <br />
       <button onClick={() => signOut()}>Sign out</button>
     </div>
   );

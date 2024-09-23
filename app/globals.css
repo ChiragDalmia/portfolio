@@ -66,6 +66,10 @@
     @apply bg-[#e6f3ff] text-[#0066cc];
   }
 
+  button{
+    @apply px-2 bg-foreground text-background rounded-full;
+  }
+
   /* Typography for Headings */
   h1,
   h2,
