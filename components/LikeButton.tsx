@@ -11,6 +11,7 @@ interface LikeState {
   localCount: number;
   isLoading: boolean;
   error: string | null;
+  isInitiallyLoaded: boolean;
 }
 
 interface LikeResponse {
@@ -23,18 +24,28 @@ export default function LikeCounter({ slug }: LikeCounterProps) {
     localCount: 0,
     isLoading: false,
     error: null,
+    isInitiallyLoaded: false,
   });
-  const { count, localCount, isLoading, error } = state;
+  const { count, localCount, isLoading, error, isInitiallyLoaded } = state;
 
   const fetchCount = useCallback(async () => {
     try {
       const res = await fetch(`/api/likes?slug=${encodeURIComponent(slug)}`);
       if (!res.ok) throw new Error("Failed to fetch like count");
       const data: LikeResponse = await res.json();
-      setState((s) => ({ ...s, count: data.count, localCount: 0 }));
+      setState((s) => ({
+        ...s,
+        count: data.count,
+        localCount: 0,
+        isInitiallyLoaded: true,
+      }));
     } catch (err) {
       console.error("Error fetching like count:", err);
-      setState((s) => ({ ...s, error: "Failed to load like count" }));
+      setState((s) => ({
+        ...s,
+        error: "Failed to load like count",
+        isInitiallyLoaded: true,
+      }));
     }
   }, [slug]);
 
@@ -96,11 +107,17 @@ export default function LikeCounter({ slug }: LikeCounterProps) {
     }));
   }, []);
 
+  if (!isInitiallyLoaded) {
+    return null; // Show nothing until initial data is loaded
+  }
+
   return (
     <div>
-      <button onClick={handleLike} disabled={isLoading} aria-label="Like">
-        Like ({count + localCount})
-      </button>
+      {(count > 0 || localCount > 0) && (
+        <button onClick={handleLike} disabled={isLoading} aria-label="Like">
+           {count + localCount}
+        </button>
+      )}
       {error && <p>{error}</p>}
     </div>
   );
