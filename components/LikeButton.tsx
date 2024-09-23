@@ -27,7 +27,7 @@ export default function LikeCounter({ slug }: LikeCounterProps) {
     error: null,
     isInitiallyLoaded: false,
   });
-  const { count, localCount, isLoading, error, isInitiallyLoaded } = state;
+  const { count, localCount, isLoading, isInitiallyLoaded } = state;
 
   const fetchCount = useCallback(async () => {
     try {
@@ -113,23 +113,25 @@ export default function LikeCounter({ slug }: LikeCounterProps) {
   }
 
   return (
-    <div className="absolute bottom-12 right-0">
-      <button
-        onClick={handleLike}
-        disabled={isLoading}
-        aria-label={`Like. Current count: ${count + localCount}`}
-        className="flex items-center"
+    <button
+      onClick={handleLike}
+      disabled={isLoading}
+      className="group flex items-center justify-center px-2 py-1 bg-background border-2 border-foreground rounded-full cursor-pointer transition-all duration-200 ease-in-out outline-none active:scale-95 ml-auto"
+      aria-label="Like"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="w-4 h-4 mr-2 transition-all fill-none duration-200 ease-in-out stroke-foreground group-hover:stroke-red-500 group-active:fill-red-500 group-active:stroke-red-500 group-active:scale-125"
       >
-        <span
-          className={`mr-1 transition-all duration-300 text-2xl ${
-            localCount > 0 ? "text-red-500" : "text-gray-500"
-          }`}
-        >
-          {localCount > 0 ? "❤️" : "🤍"}
-        </span>
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+      </svg>
+      <span className="text-sm font-semibold text-foreground">
         {count + localCount}
-      </button>
-      {error && <div>:P</div>}
-    </div>
+      </span>
+    </button>
   );
 }
