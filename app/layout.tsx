@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.className} [scrollbar-gutter:stable]`}>
+    <html lang="en" className={`${inter.className} [scrollbar-gutter:stable] dark`}>
       <body className="antialiased tracking-tight">
         <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-4">
           <main className="pt-12 max-w-[60ch] mx-auto w-full space-y-6">
