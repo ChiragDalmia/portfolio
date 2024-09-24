@@ -5,7 +5,7 @@ import { Analytics } from "@vercel/analytics/react";
 import Link from "next/link";
 
 import ThemeToggle from "@/components/ThemeToggle";
-import { Providers } from "@/components/authentication/providers";
+import { Providers } from "@/components/providers";
 
 
 const inter = Inter({ subsets: ["latin"] });
