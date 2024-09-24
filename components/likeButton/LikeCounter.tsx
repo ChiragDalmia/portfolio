@@ -2,57 +2,19 @@
 
 import { useState, useEffect, useCallback } from "react";
 
-
-interface LikeCounterProps {
+interface LikeButtonProps {
   slug: string;
+  initialCount: number;
 }
 
-interface LikeState {
-  count: number;
-  localCount: number;
-  isLoading: boolean;
-  error: string | null;
-  isInitiallyLoaded: boolean;
-}
-
-interface LikeResponse {
-  count: number;
-}
-
-export default function LikeCounter({ slug }: LikeCounterProps) {
-  const [state, setState] = useState<LikeState>({
-    count: 0,
+export function LikeCounter({ slug, initialCount }: LikeButtonProps) {
+  const [state, setState] = useState({
+    count: initialCount,
     localCount: 0,
     isLoading: false,
-    error: null,
-    isInitiallyLoaded: false,
+    error: null as string | null,
   });
-  const { count, localCount, isLoading, isInitiallyLoaded } = state;
-
-  const fetchCount = useCallback(async () => {
-    try {
-      const res = await fetch(`/api/likes?slug=${encodeURIComponent(slug)}`);
-      if (!res.ok) throw new Error("Failed to fetch like count");
-      const data: LikeResponse = await res.json();
-      setState((s) => ({
-        ...s,
-        count: data.count,
-        localCount: 0,
-        isInitiallyLoaded: true,
-      }));
-    } catch (err) {
-      console.error("Error fetching like count:", err);
-      setState((s) => ({
-        ...s,
-        error: "Failed to load like count",
-        isInitiallyLoaded: true,
-      }));
-    }
-  }, [slug]);
-
-  useEffect(() => {
-    fetchCount();
-  }, [fetchCount]);
+  const { count, localCount, isLoading } = state;
 
   const updateLikes = useCallback(async () => {
     if (localCount === 0) return;
@@ -74,7 +36,7 @@ export default function LikeCounter({ slug }: LikeCounterProps) {
         );
       }
 
-      const data: LikeResponse = await res.json();
+      const data: { count: number } = await res.json();
       setState((s) => ({
         ...s,
         count: data.count,
@@ -107,10 +69,6 @@ export default function LikeCounter({ slug }: LikeCounterProps) {
       localCount: s.localCount + 1,
     }));
   }, []);
-
-  if (!isInitiallyLoaded) {
-    return null; // Show nothing until initial data is loaded
-  }
 
   return (
     <button
