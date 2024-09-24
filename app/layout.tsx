@@ -21,6 +21,14 @@ export const metadata: Metadata = {
   },
   description:
     "Front-end Developer | Crafting clean, efficient, and impactful digital experiences.",
+  openGraph: {
+    siteName: "Chirag Dalmia",
+    url: "https://chiragdalmia.com",
+    type: "website",
+    title: "Chirag Dalmia",
+    description:
+      "Front-end Developer | Crafting clean, efficient, and impactful digital experiences.",
+  },
 };
 
 export default function RootLayout({
