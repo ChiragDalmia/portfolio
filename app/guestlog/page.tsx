@@ -1,4 +1,4 @@
-import { AuthStatus } from "@/components/AuthStatus";
+import { AuthStatus } from "@/components/authentication/AuthStatus";
 import { getCurrentUser } from "@/lib/auth";
 
 export default async function Page() {

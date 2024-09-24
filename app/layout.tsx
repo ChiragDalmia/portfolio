@@ -3,8 +3,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import Link from "next/link";
-import { Providers } from "@/components/providers";
+
 import ThemeToggle from "@/components/ThemeToggle";
+import { Providers } from "@/components/authentication/providers";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -28,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.className} [scrollbar-gutter:stable] dark`}>
+    <html lang="en" className={`${inter.className} [scrollbar-gutter:stable]`}>
       <body className="antialiased tracking-tight">
         <div className="min-h-[100svh] flex flex-col justify-between pt-0 md:pt-8 p-4">
           <main className="pt-12 max-w-[60ch] mx-auto w-full space-y-6">
