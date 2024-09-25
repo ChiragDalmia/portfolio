@@ -20,14 +20,14 @@ export const metadata: Metadata = {
     template: "%s | Chirag Dalmia",
   },
   description:
-    "Front-end Developer | Crafting clean, efficient, and impactful digital experiences.",
+    "Front-end Developer",
   openGraph: {
     siteName: "Chirag Dalmia",
     url: "https://chiragdalmia.com",
     type: "website",
     title: "Chirag Dalmia",
     description:
-      "Front-end Developer | Crafting clean, efficient, and impactful digital experiences.",
+      "Front-end Developer",
   },
 };
 
@@ -37,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.className} [scrollbar-gutter:stable]`}>
+    <html lang="en" className={`${inter.className} [scrollbar-gutter:stable] dark`}>
       <body className="antialiased tracking-tight">
         <div className="min-h-[100svh] flex flex-col justify-between pt-0 md:pt-8 p-4">
           <main className="pt-12 max-w-[60ch] mx-auto w-full space-y-6">
@@ -81,8 +81,9 @@ function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Lee Rob
+          Lee Rob {" "}
         </Link>
+        (mine has alot more going on than just mdx files)
       </div>
     </footer>
   );
