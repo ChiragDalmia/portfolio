@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.className} [scrollbar-gutter:stable] dark`}>
       <body className="antialiased tracking-tight">
-        <div className="min-h-[100svh] flex flex-col justify-between pt-0 md:pt-8 p-4">
+        <div className="min-h-[100svh] flex flex-col justify-between pt-0 p-4">
           <main className="pt-12 max-w-[60ch] mx-auto w-full space-y-6">
             <ThemeToggle />
             <Providers>{children}</Providers>
@@ -74,16 +74,15 @@ function Footer() {
           </Link>
         ))}
       </div>
-      <div className="mt-4 text-xs text-gray-400">
+      <div className="mt-3 text-xs text-gray-400">
         Portfolio Inspired By{" "}
         <Link
           href="https://leerob.io"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Lee Rob {" "}
+          Lee Rob
         </Link>
-        (mine has alot more going on than just mdx files)
       </div>
     </footer>
   );

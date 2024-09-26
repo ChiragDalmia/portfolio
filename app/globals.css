@@ -26,8 +26,8 @@
     --radius: 0.5rem;
     --selection-bg-light: #e6f3ff;
     --selection-text-light: #0066cc;
-    --selection-bg-dark: #122e2e;
-    --selection-text-dark: #68d1bf;
+    --selection-bg-dark: #0a1d1d;
+    --selection-text-dark: #74ecd8;
   }
 
   .dark {
