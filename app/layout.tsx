@@ -7,7 +7,6 @@ import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
 import { Providers } from "@/components/providers";
 
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -19,15 +18,13 @@ export const metadata: Metadata = {
     default: "Chirag Dalmia",
     template: "%s | Chirag Dalmia",
   },
-  description:
-    "Front-end Developer",
+  description: "Front-end Developer",
   openGraph: {
     siteName: "Chirag Dalmia",
     url: "https://chiragdalmia.com",
     type: "website",
     title: "Chirag Dalmia",
-    description:
-      "Front-end Developer",
+    description: "Front-end Developer",
   },
 };
 
@@ -37,10 +34,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.className} [scrollbar-gutter:stable] dark`}>
+    <html
+      lang="en"
+      className={`${inter.className} [scrollbar-gutter:stable] dark`}
+    >
       <body className="antialiased tracking-tight">
-        <div className="min-h-[100svh] flex flex-col justify-between pt-0 p-4">
-          <main className="pt-12 max-w-[60ch] mx-auto w-full space-y-6">
+        <div className="min-h-[100svh] flex flex-col justify-between pt-0 md:pt-8 p-8">
+          <main className="pt-10 max-w-[70ch] mx-auto w-full space-y-6 relative">
             <ThemeToggle />
             <Providers>{children}</Providers>
           </main>
