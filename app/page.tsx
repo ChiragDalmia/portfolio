@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react'
 
 const page = () => {
@@ -10,7 +11,7 @@ const page = () => {
           <a href="/projects">cool web stuff</a> and yapping about{" "}
           <a href="/yap-corner">the process</a>. Specializing in 3D, clean UI,
           and interactive designs. Share your thoughts{" "}
-          <a href="/guestlog">here</a>.
+          <Link href="/guestlog">in my guestlog</Link>.
         </li>
       </ul>
 

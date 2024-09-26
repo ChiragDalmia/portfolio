@@ -119,11 +119,11 @@
 
   /* Links */
   a {
-    @apply text-blue-500 hover:text-blue-700 no-underline transition-colors duration-200;
+    @apply text-blue-500 hover:text-blue-700 transition-colors duration-200;
   }
 
   .dark a {
-    @apply text-green-500 hover:text-green-700;
+    @apply text-green-400 hover:text-green-600 ;
   }
 
   /* Typography for Content */
