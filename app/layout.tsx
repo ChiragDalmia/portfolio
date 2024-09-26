@@ -15,16 +15,31 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   title: {
-    default: "Chirag Dalmia",
+    default: "Chirag Dalmia | Front-end Developer",
     template: "%s | Chirag Dalmia",
   },
-  description: "Front-end Developer",
+  description:
+    "Portfolio of Chirag Dalmia, a Front-end Developer specializing in modern web technologies.",
   openGraph: {
     siteName: "Chirag Dalmia",
     url: "https://chiragdalmia.com",
     type: "website",
-    title: "Chirag Dalmia",
-    description: "Front-end Developer",
+    title: "Chirag Dalmia | Front-end Developer",
+    description:
+      "Portfolio of Chirag Dalmia, a Front-end Developer specializing in modern web technologies.",
+    images: [
+      {
+        url: "https://chiragdalmia.com/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Chirag Dalmia - Front-end Developer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@dotchirag",
+    creator: "@dotchirag",
   },
 };
 
@@ -36,17 +51,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.className} [scrollbar-gutter:stable] dark`}
+      className={`${inter.className} [scrollbar-gutter:stable] dark antialiased tracking-tight`}
     >
-      <body className="antialiased tracking-tight">
-        <div className="min-h-[100svh] flex flex-col justify-between pt-0 md:pt-8 p-8">
-          <main className="pt-10 max-w-[70ch] mx-auto w-full space-y-6 relative">
+      <body className="min-h-[100svh] flex flex-col">
+        <div className="flex-grow flex flex-col p-4">
+          <header className="max-w-[70ch] mx-auto w-full relative">
             <ThemeToggle />
+          </header>
+          <main className="max-w-[70ch] mx-auto w-full space-y-6 flex-grow">
             <Providers>{children}</Providers>
           </main>
-          <Footer />
-          <Analytics />
         </div>
+        <Footer />
+        <Analytics />
       </body>
     </html>
   );
@@ -60,20 +77,24 @@ function Footer() {
   ];
 
   return (
-    <footer className="mt-12 text-center">
-      <div className="flex justify-center items-end space-x-4 tracking-tight">
-        {links.map((link) => (
-          <Link
-            key={link.name}
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-blue-500 transition-colors duration-200"
-          >
-            {link.name}
-          </Link>
-        ))}
-      </div>
+    <footer className="mt-auto py-6 text-center">
+      <nav aria-label="Social media links">
+        <ul className="flex justify-center items-end space-x-4 tracking-tight">
+          {links.map((link) => (
+            <li key={link.name}>
+              <Link
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-blue-500 transition-colors duration-200"
+              >
+                <span className="sr-only">Chirag Dalmia on </span>
+                {link.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
       <div className="mt-3 text-xs text-gray-400">
         Portfolio Inspired By{" "}
         <Link
