@@ -24,9 +24,13 @@
     --input: 210 40% 89.8%;
     --ring: 210 100% 50%;
     --radius: 0.5rem;
+    --selection-bg-light: #e6f3ff;
+    --selection-text-light: #0066cc;
+    --selection-bg-dark: #122e2e;
+    --selection-text-dark: #68d1bf;
   }
 
-  :root.dark {
+  .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
@@ -50,23 +54,50 @@
 }
 
 @layer base {
-  /* The rest of your CSS remains unchanged */
-
   html {
     @apply bg-background text-foreground leading-relaxed transition-all duration-300;
   }
 
-  /* Dark Mode Selection */
-  :root.dark ::selection {
-    @apply bg-[#122e2e] text-[#68d1bf];
-  }
-
   /* Light Mode Selection */
   ::selection {
-    @apply bg-[#e6f3ff] text-[#0066cc];
+    background-color: var(--selection-bg-light);
+    color: var(--selection-text-light);
   }
 
-  button{
+  ::-moz-selection {
+    background-color: var(--selection-bg-light);
+    color: var(--selection-text-light);
+  }
+
+  /* Dark Mode Selection */
+  .dark ::selection {
+    background-color: var(--selection-bg-dark);
+    color: var(--selection-text-dark);
+  }
+
+  .dark ::-moz-selection {
+    background-color: var(--selection-bg-dark);
+    color: var(--selection-text-dark);
+  }
+
+    .dark ::-webkit-selection {
+      background-color: var(--selection-bg-dark);
+      color: var(--selection-text-dark);
+    }
+  /* iOS-specific styles */
+  @supports (-webkit-touch-callout: none) {
+    ::selection {
+      background-color: var(--selection-bg-light);
+      color: var(--selection-text-light);
+    }
+
+    .dark ::selection {
+      background-color: var(--selection-bg-dark);
+      color: var(--selection-text-dark);
+    }
+  }
+
+  button {
     @apply px-2 bg-foreground text-background rounded-full;
   }
 
@@ -91,7 +122,7 @@
     @apply text-blue-500 hover:text-blue-700 no-underline transition-colors duration-200;
   }
 
-  :root.dark a {
+  .dark a {
     @apply text-green-500 hover:text-green-700;
   }
 
@@ -118,8 +149,8 @@
     @apply bg-blue-200 text-blue-900 px-1 rounded-md;
   }
 
-  :root.dark mark {
-    @apply bg-green-900 text-green-200
+  .dark mark {
+    @apply bg-green-900 text-green-200;
   }
 
   /* Small Text */
@@ -146,7 +177,7 @@
     @apply text-blue-900 no-underline;
   }
 
-  :root.dark ins {
+  .dark ins {
     @apply text-green-900;
   }
 
@@ -301,7 +332,7 @@
   /* Accessibility enhancements */
   audio:focus,
   video:focus {
-    @apply outline-none;
+    @apply outline-none ring-2 ring-primary ring-offset-2;
   }
 
   /* Captions and subtitles */
