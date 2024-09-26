@@ -58,7 +58,7 @@ export default function RootLayout({
           <header className="max-w-[70ch] mx-auto w-full relative">
             <ThemeToggle />
           </header>
-          <main className="max-w-[70ch] mx-auto w-full space-y-6 flex-grow">
+          <main className="max-w-[70ch] mx-auto w-full space-y-6 flex-grow pt-4 md:pt-8">
             <Providers>{children}</Providers>
           </main>
         </div>
