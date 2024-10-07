@@ -72,38 +72,33 @@ export default function RootLayout({
 function Footer() {
   const links = [
     { name: "@dotchirag", url: "https://x.com/dotchirag" },
-    { name: "linkedin", url: "https://www.linkedin.com/in/chiragdalmia007" },
     { name: "github", url: "https://github.com/chiragdalmia" },
+    { name: "linkedin", url: "https://www.linkedin.com/in/chiragdalmia007" },
   ];
 
   return (
-    <footer className="mt-auto py-6 text-center">
-      <nav aria-label="Social media links">
-        <ul className="flex justify-center items-end space-x-4 tracking-tight">
-          {links.map((link) => (
-            <li key={link.name}>
-              <Link
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-500 transition-colors duration-200"
-              >
-                <span className="sr-only">Chirag Dalmia on </span>
-                {link.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-      <div className="mt-3 text-xs text-gray-400">
-        Portfolio Inspired By{" "}
-        <Link
-          href="https://leerob.io"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Lee Rob
-        </Link>
+    <footer className="mt-auto py-4">
+      <div className="flex justify-between items-center max-w-[70ch] mx-auto text-sm text-gray-500 dark:text-gray-400">
+        <p>&copy; {new Date().getFullYear()} Chirag Dalmia</p>
+        <nav aria-label="Social media links">
+          <ul className="flex space-x-4">
+
+
+            {links.map((link) => (
+              <li key={link.name}>
+                <Link
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-blue-500 transition-colors duration-200"
+                >
+                  <span className="sr-only">Chirag Dalmia on {link.name}</span>
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
     </footer>
   );
