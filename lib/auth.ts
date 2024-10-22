@@ -1,8 +1,32 @@
-import { getServerSession } from "next-auth/next";
+import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
-import { AuthOptions } from "next-auth";
+import type { NextAuthConfig } from "next-auth";
 
-// Extend the built-in types
+export const config = {
+  providers: [
+    GithubProvider({
+      clientId: process.env.AUTH_GITHUB_ID,
+      clientSecret: process.env.AUTH_GITHUB_SECRET,
+    }),
+  ],
+  callbacks: {
+    async jwt({ token, profile }) {
+      if (profile) {
+        token.username = profile.login;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (session.user && typeof token.username === "string") {
+        session.user.username = token.username;
+      }
+      return session;
+    },
+  },
+} satisfies NextAuthConfig;
+
+export const { handlers, auth, signIn, signOut } = NextAuth(config);
+
 declare module "next-auth" {
   interface Session {
     user: {
@@ -21,43 +45,4 @@ declare module "next-auth/jwt" {
   interface JWT {
     username?: string;
   }
-}
-
-if (!process.env.AUTH_GITHUB_ID || !process.env.AUTH_GITHUB_SECRET) {
-  throw new Error(
-    "Missing AUTH_GITHUB_ID or AUTH_GITHUB_SECRET environment variable"
-  );
-}
-
-export const authOptions: AuthOptions = {
-  providers: [
-    GithubProvider({
-      clientId: process.env.AUTH_GITHUB_ID,
-      clientSecret: process.env.AUTH_GITHUB_SECRET,
-    }),
-  ],
-  callbacks: {
-    async jwt({ token, profile }) {
-      if (profile) {
-        token.username = profile.login;
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      if (session.user) {
-        session.user.username = token.username;
-      }
-      return session;
-    },
-  },
-  secret: process.env.NEXTAUTH_SECRET,
-};
-
-export async function getSession() {
-  return await getServerSession(authOptions);
-}
-
-export async function getCurrentUser() {
-  const session = await getSession();
-  return session?.user;
 }

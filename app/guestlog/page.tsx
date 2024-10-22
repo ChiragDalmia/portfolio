@@ -1,17 +1,14 @@
+import { auth } from "@/lib/auth";
 import { AuthStatus } from "@/components/authentication/AuthStatus";
-import { getCurrentUser } from "@/lib/auth";
 
 export default async function Page() {
- const user = await getCurrentUser();
+  const session = await auth();
+
   return (
     <section>
-      {user ? (
-        <p className="text-2xl">
-        Hey, Leave a commemt here?
-        </p>
-      ) : (
-        <></>
-      )}
+      {session?.user ? (
+        <p className="text-2xl">Hey, Leave a comment here?</p>
+      ) : null}
       <AuthStatus />
     </section>
   );
