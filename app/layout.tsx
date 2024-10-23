@@ -80,8 +80,8 @@ function Footer() {
 
   return (
     <footer className="mt-auto py-4">
-      <div className="flex justify-between items-center max-w-[70ch] mx-auto text-sm text-gray-500 dark:text-gray-400">
-        <p>&copy; {new Date().getFullYear()} Chirag Dalmia</p>
+      <div className="flex justify-center items-center max-w-[70ch] mx-auto text-sm text-gray-500 dark:text-gray-400">
+       
         <nav aria-label="Social media links">
           <ul className="flex space-x-4">
 
