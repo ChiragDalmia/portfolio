@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import ThemeToggle from "@/components/ThemeToggle";
 import { Providers } from "@/components/providers";
+import NoiseBackground from "@/components/NoiseBackground";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -64,6 +65,7 @@ export default function RootLayout({
         </div>
         <Footer />
         <Analytics />
+        <NoiseBackground />
       </body>
     </html>
   );
