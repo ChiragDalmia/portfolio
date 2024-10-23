@@ -27,7 +27,7 @@
     --selection-bg-light: #e6f3ff;
     --selection-text-light: #0066cc;
     --selection-bg-dark: #0a1d1d;
-    --selection-text-dark: #74ecd8;
+    --selection-text-dark: #0e86ff;
   }
 
   .dark {
@@ -123,7 +123,7 @@
   }
 
   .dark a {
-    @apply text-green-400 hover:text-green-600 ;
+    @apply text-blue-400 hover:text-blue-500 ;
   }
 
   /* Typography for Content */
