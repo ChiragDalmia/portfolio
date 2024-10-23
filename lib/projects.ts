@@ -7,7 +7,8 @@ export const projectsData = [
   },
   {
     name: "ARchatPet",
-    url: "https://archatpet.vercel.app/landing",
+    // url: "https://archatpet.vercel.app/",
+    url: "https://www.bringthembackto.us/",
     description:
       "Turn a simple photo of your pet into a 3D model and chat with it in an AR world.",
   },
@@ -21,7 +22,7 @@ export const projectsData = [
     name: "Quicture",
     url: "https://sharethephotoswithus.us/",
     description:
-      "Peer-to-peer image sharing platform that preserves quality, with temporary cloud storage options.",
+      "Peer-to-peer image sharing platform on the go, that preserves quality",
   },
   {
     name: "Old Portfolio",
@@ -37,6 +38,6 @@ export const projectsData = [
     name: "VanillaJs Corner",
     url: "https://myvanillajs.netlify.app/",
     description:
-      "A collection of simple JavaScript projects I made as a beginner",
+      "A collection of simple JavaScript projects",
   },
 ];
