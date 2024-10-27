@@ -24,10 +24,6 @@
     --input: 210 40% 89.8%;
     --ring: 210 100% 50%;
     --radius: 0.5rem;
-    --selection-bg-light: #e6f3ff;
-    --selection-text-light: #0066cc;
-    --selection-bg-dark: #0a1d1d;
-    --selection-text-dark: #0e86ff;
   }
 
   .dark {
@@ -58,50 +54,14 @@
     @apply bg-background text-foreground leading-relaxed transition-all duration-300;
   }
 
-  /* Light Mode Selection */
   ::selection {
-    background-color: var(--selection-bg-light);
-    color: var(--selection-text-light);
-  }
-
-  ::-moz-selection {
-    background-color: var(--selection-bg-light);
-    color: var(--selection-text-light);
-  }
-
-  /* Dark Mode Selection */
-  .dark ::selection {
-    background-color: var(--selection-bg-dark);
-    color: var(--selection-text-dark);
-  }
-
-  .dark ::-moz-selection {
-    background-color: var(--selection-bg-dark);
-    color: var(--selection-text-dark);
-  }
-
-    .dark ::-webkit-selection {
-      background-color: var(--selection-bg-dark);
-      color: var(--selection-text-dark);
-    }
-  /* iOS-specific styles */
-  @supports (-webkit-touch-callout: none) {
-    ::selection {
-      background-color: var(--selection-bg-light);
-      color: var(--selection-text-light);
-    }
-
-    .dark ::selection {
-      background-color: var(--selection-bg-dark);
-      color: var(--selection-text-dark);
-    }
+    @apply bg-blue-100 text-blue-900 dark:bg-blue-950 dark:text-blue-100;
   }
 
   button {
     @apply px-2 bg-foreground text-background rounded-full;
   }
 
-  /* Typography for Headings */
   h1,
   h2,
   h3,
@@ -111,29 +71,25 @@
     @apply mt-6 mb-2 leading-tight font-medium text-foreground;
   }
 
-  /* Navigation */
   ul li,
   ol li {
     @apply ml-4;
   }
 
-  /* Links */
+  textarea {
+    @apply w-full px-3 py-2 bg-gray-100 rounded-lg focus:outline-none resize-none;
+  }
+
   a {
-    @apply text-blue-500 hover:text-blue-700 transition-colors duration-200;
+    @apply text-blue-500 hover:text-blue-700 transition-colors duration-200 dark:text-blue-400 dark:hover:text-blue-500;
   }
 
-  .dark a {
-    @apply text-blue-400 hover:text-blue-500 ;
-  }
-
-  /* Typography for Content */
   p,
   ul,
   ol {
     @apply mb-4 text-foreground leading-relaxed;
   }
 
-  /* Emphasis */
   strong,
   b {
     @apply font-bold;
@@ -144,77 +100,30 @@
     @apply italic;
   }
 
-  /* Highlight */
   mark {
-    @apply bg-blue-200 text-blue-900 px-1 rounded-md;
+    @apply bg-blue-200 text-blue-900 px-1 rounded-md dark:bg-green-900 dark:text-green-200;
   }
 
-  .dark mark {
-    @apply bg-green-900 text-green-200;
-  }
-
-  /* Small Text */
   small {
     @apply text-sm text-muted-foreground;
   }
 
-  /* Abbreviations */
   abbr {
     @apply relative text-primary cursor-help no-underline;
   }
 
-  abbr::after {
-    @apply absolute left-1/2 top-full -translate-x-1/2 bg-muted text-muted-foreground px-2 py-1 rounded text-sm whitespace-nowrap opacity-0 scale-0 invisible transition-all duration-300 z-10;
-    content: attr(data-tooltip);
-  }
-
-  abbr:hover::after {
-    @apply opacity-100 visible scale-100;
-  }
-
-  /* Inserted and Deleted Text */
-  ins {
-    @apply text-blue-900 no-underline;
-  }
-
-  .dark ins {
-    @apply text-green-900;
-  }
-
-  del {
-    @apply line-through;
-  }
-
-  /* Superscript and Subscript */
-  sup,
-  sub {
-    @apply text-xs align-baseline;
-  }
-
-  sup {
-    @apply top-[-0.5em];
-  }
-
-  sub {
-    @apply bottom-[-0.25em];
-  }
-
-  /* Code */
   code {
     @apply font-mono bg-muted px-1.5 py-0.5 rounded-md text-sm text-foreground;
   }
 
-  /* Quotes */
   blockquote {
     @apply my-6 pl-6 border-l-4 border-muted text-muted-foreground italic;
   }
 
-  /* Preformatted Text */
   pre {
     @apply bg-muted p-4 overflow-x-auto rounded-md text-sm leading-relaxed my-4;
   }
 
-  /* Figures and Images */
   figure {
     @apply my-6 rounded-md;
   }
@@ -227,7 +136,6 @@
     @apply max-w-full mx-auto h-auto rounded-md;
   }
 
-  /* Description Lists */
   dl dt {
     @apply mb-1;
   }
@@ -236,7 +144,6 @@
     @apply ml-4;
   }
 
-  /* Tables */
   table {
     @apply w-full border-collapse mb-6;
   }
@@ -250,12 +157,10 @@
     @apply bg-muted font-semibold;
   }
 
-  /* Horizontal Rule */
   hr {
     @apply h-[2px] bg-border rounded-full;
   }
 
-  /* Structure */
   section {
     @apply mb-6;
   }
@@ -264,93 +169,36 @@
     @apply border-b border-border pb-6 mb-6;
   }
 
-  /* Media Element Styles */
-
-  /* Base styles for both audio and video */
   audio,
   video {
     @apply w-full max-w-2xl mx-auto my-4 rounded-lg overflow-hidden;
   }
 
-  /* Video-specific styles */
   video {
     @apply aspect-video object-cover;
   }
 
-  /* Audio-specific styles */
   audio {
     @apply h-12 bg-secondary rounded-full object-cover;
   }
 
-  /* Custom controls for better visual integration */
-  audio::-webkit-media-controls,
-  video::-webkit-media-controls {
-    @apply bg-transparent;
-  }
-
-  audio::-webkit-media-controls-panel,
-  video::-webkit-media-controls-panel {
-    @apply bg-secondary border-none;
-  }
-
-  audio::-webkit-media-controls-play-button,
-  video::-webkit-media-controls-play-button {
-    @apply text-foreground hover:text-primary transition-colors;
-  }
-
-  audio::-webkit-media-controls-current-time-display,
-  audio::-webkit-media-controls-time-remaining-display,
-  video::-webkit-media-controls-current-time-display,
-  video::-webkit-media-controls-time-remaining-display {
-    @apply text-foreground/90 text-sm;
-  }
-
-  audio::-webkit-media-controls-volume-slider,
-  video::-webkit-media-controls-volume-slider {
-    @apply accent-primary;
-  }
-
-  audio::-webkit-media-controls-mute-button,
-  video::-webkit-media-controls-mute-button {
-    @apply text-foreground hover:text-primary transition-colors;
-  }
-
-  audio::-webkit-media-controls-timeline,
-  video::-webkit-media-controls-timeline {
-    @apply accent-primary;
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 640px) {
-
-    audio,
-    video {
-      @apply max-w-full rounded-md;
-    }
-  }
-
-  /* Accessibility enhancements */
   audio:focus,
   video:focus {
     @apply outline-none ring-2 ring-primary ring-offset-2;
   }
 
-  /* Captions and subtitles */
   video::cue {
     @apply bg-background/75 text-foreground font-medium px-1 py-0.5 rounded;
   }
 
-  /* Loading state */
   .media-loading {
     @apply animate-pulse bg-muted;
   }
 
-  /* Error state */
   .media-error {
     @apply border border-destructive bg-destructive/10 text-destructive p-4 rounded-lg text-center;
   }
 
-  /* Fullscreen mode */
   video:fullscreen {
     @apply w-screen h-screen max-w-none mx-0 my-0;
   }
