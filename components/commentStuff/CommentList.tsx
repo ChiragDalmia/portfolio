@@ -13,6 +13,7 @@ type Comment = {
 export default function CommentList({ comments }: { comments: Comment[] }) {
   return (
     <ul className="space-y-4">
+      <h2 className="text-lg font-bold mb-4">Comments</h2>
       {comments.map(
         ({ id, username, name, avatar_url, content, created_at }) => (
           <li key={id} className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4">

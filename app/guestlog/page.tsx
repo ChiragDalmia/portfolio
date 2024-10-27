@@ -7,9 +7,9 @@ export default async function Page() {
 
   return (
     <main>
-      <h1>Community Guest Book</h1>
+      <h1>Guest Book</h1>
       {session?.user ? (
-        <p>Welcome, {session.user.name}! Share your thoughts below.</p>
+        <p>Wassup, {session.user.name}! Share your thoughts below.()</p>
       ) : (
         <p>Join the conversation! Sign in to leave a comment.</p>
       )}
