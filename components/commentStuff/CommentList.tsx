@@ -18,7 +18,7 @@ export default function CommentList({ comments }: { comments: Comment[] }) {
         ({ id, username, name, avatar_url, content, created_at }) => (
           <li key={id} className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4">
             <Link
-              href={`/profile/${username}`}
+              href={`https://github.com/${username}`}
               className="flex items-center mb-2"
             >
               <Image
