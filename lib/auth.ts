@@ -17,8 +17,8 @@ export const config = {
       return token;
     },
     async session({ session, token }) {
-      if (session.user && typeof token.username === "string") {
-        session.user.username = token.username;
+      if (session.user) {
+        session.user.username = token.username as string;
       }
       return session;
     },
