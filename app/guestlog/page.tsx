@@ -6,17 +6,15 @@ export default async function Page() {
   const session = await auth();
 
   return (
-    <section >
-      <h1 >Guest Log</h1>
+    <main>
+      <h1>Community Guest Book</h1>
       {session?.user ? (
-        <p>
-          Hey {session.user.name}, leave a comment here!
-        </p>
+        <p>Welcome, {session.user.name}! Share your thoughts below.</p>
       ) : (
-        <p>Sign in with GitHub to leave a comment.</p>
+        <p>Join the conversation! Sign in to leave a comment.</p>
       )}
-      <CommentSection />
       <AuthStatus />
-    </section>
+      <CommentSection />
+    </main>
   );
 }

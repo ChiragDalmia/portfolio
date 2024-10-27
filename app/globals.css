@@ -76,9 +76,9 @@
     @apply ml-4;
   }
 
-  textarea {
-    @apply w-full px-3 py-2 bg-gray-100 rounded-lg focus:outline-none resize-none;
-  }
+  /* textarea {
+    @apply w-full px-3 py-2 max-w-96 bg-gray-100 dark:bg-gray-900 text-foreground rounded-lg focus:outline-none resize-none;
+  } */
 
   a {
     @apply text-blue-500 hover:text-blue-700 transition-colors duration-200 dark:text-blue-400 dark:hover:text-blue-500;
