@@ -1,6 +1,6 @@
 import { auth } from "@/lib/auth";
 import { AuthStatus } from "@/components/authentication/AuthStatus";
-import CommentSection from "@/components/CommentSection";
+import CommentSection from "@/components/commentStuff/CommentSection";
 
 export default async function Page() {
   const session = await auth();
