@@ -1,5 +1,6 @@
-import Link from "next/link";
+import { timeAgo } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 
 type Comment = {
   id: string;
@@ -12,31 +13,39 @@ type Comment = {
 
 export default function CommentList({ comments }: { comments: Comment[] }) {
   return (
-    <ul className="space-y-4">
+    <div className="space-y-4 p-4">
       <h2 className="text-lg font-bold mb-4">Comments</h2>
-      {comments.map(
-        ({ id, username, name, avatar_url, content, created_at }) => (
-          <li key={id} className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4">
-            <Link
-              href={`https://github.com/${username}`}
-              className="flex items-center mb-2"
-            >
-              <Image
-                src={avatar_url}
-                alt=""
-                width={40}
-                height={40}
-                className="rounded-full mr-2"
-              />
-              <span className="font-semibold">{name}</span>
-            </Link>
-            <p className="mb-2">{content}</p>
-            <time dateTime={created_at} className="text-sm text-gray-500">
-              {new Date(created_at).toLocaleString()}
-            </time>
-          </li>
-        )
-      )}
-    </ul>
+      <ul className="space-y-4">
+        {comments.map(
+          ({ id, username, name, avatar_url, content, created_at }) => (
+            <li key={id} className="flex items-start space-x-3">
+              <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
+                <Image
+                  src={avatar_url}
+                  alt={name}
+                  width={40}
+                  height={40}
+                  className="object-cover"
+                />
+              </div>
+              <div className="flex-1 space-y-1">
+                <div className="flex items-center gap-3">
+                  <Link
+                    href={`https://github.com/${username}`}
+                    className="font-medium"
+                  >
+                    {name}
+                  </Link>
+                  <time dateTime={created_at} className="text-xs text-gray-400">
+                    {timeAgo(created_at)}
+                  </time>
+                </div>
+                <p className="text-sm ">{content}</p>
+              </div>
+            </li>
+          )
+        )}
+      </ul>
+    </div>
   );
 }

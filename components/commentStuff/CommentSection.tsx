@@ -6,7 +6,7 @@ export default async function CommentSection() {
   const comments: Comment[] = await getComments();
 
   return (
-    <section className="w-full max-w-2xl mx-auto">
+    <section className="">
       <CommentList comments={comments} />
       <CommentForm />
     </section>
