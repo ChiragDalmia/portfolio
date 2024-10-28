@@ -13,7 +13,7 @@ export type Comment = {
   created_at: string;
 };
 
-type CommentActionState = {
+export type CommentActionState = {
   error?: string;
   success?: boolean;
   comment?: Comment;

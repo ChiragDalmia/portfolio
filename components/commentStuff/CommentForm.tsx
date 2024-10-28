@@ -1,9 +1,9 @@
 "use client";
 
-import { useActionState, useRef } from "react";
+import { useRef } from "react";
 import { useSession } from "next-auth/react";
-import {  useFormStatus } from "react-dom";
-import { addComment } from "@/lib/comment-actions";
+import { useFormState, useFormStatus } from "react-dom";
+import { addComment, type CommentActionState } from "@/lib/comment-actions";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -22,17 +22,15 @@ function SubmitButton() {
 export default function CommentForm() {
   const { data: session } = useSession();
   const formRef = useRef<HTMLFormElement>(null);
-  const [state, formAction] = useActionState(addComment, null);
+  const initialState: CommentActionState = { success: false };
+  const [state, formAction] = useFormState(addComment, initialState);
 
   if (!session?.user) return null;
 
   return (
     <form
       ref={formRef}
-      action={async (formData) => {
-        await formAction(formData);
-        formRef.current?.reset();
-      }}
+      action={formAction}
       className="fixed bottom-14 left-0 w-full flex justify-center"
     >
       <div className="relative w-full max-w-96 h-12 bg-gray-100 dark:bg-gray-900 rounded-full">
@@ -46,7 +44,7 @@ export default function CommentForm() {
         />
         <SubmitButton />
       </div>
-      {state?.error && (
+      {state.error && (
         <p className="text-red-500 text-sm mt-2">{state.error}</p>
       )}
     </form>
