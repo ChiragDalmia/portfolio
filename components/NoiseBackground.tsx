@@ -2,7 +2,7 @@ import React from "react";
 
 export default function NoiseBackground() {
   return (
-    <div className="fixed inse z-50 opacity-70 w-full h-full pointer-events-none">
+    <div className="inset z-50 opacity-70 w-full h-full pointer-events-none">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         version="1.1"

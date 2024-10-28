@@ -54,7 +54,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.className} [scrollbar-gutter:stable] dark antialiased tracking-tight`}
     >
-      <body className="min-h-[100svh] flex flex-col">
+      <body className="min-h-[100vh] flex flex-col">
         <div className="flex-grow flex flex-col p-4">
           <header className="max-w-[70ch] mx-auto w-full relative">
             <ThemeToggle />
@@ -65,7 +65,7 @@ export default function RootLayout({
         </div>
         <Footer />
         <Analytics />
-        <NoiseBackground />
+        {/* <NoiseBackground /> */}
       </body>
     </html>
   );
