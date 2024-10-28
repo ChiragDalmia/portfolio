@@ -2,19 +2,17 @@
 
 import { useRef } from "react";
 import { useSession } from "next-auth/react";
-import { useFormState, useFormStatus } from "react-dom";
+import { useActionState } from "react";
 import { addComment, type CommentActionState } from "@/lib/comment-actions";
 
-function SubmitButton() {
-  const { pending } = useFormStatus();
-
+function SubmitButton({ isPending }: { isPending: boolean }) {
   return (
     <button
       type="submit"
       className="absolute right-0 top-0 h-full px-4"
-      disabled={pending}
+      disabled={isPending}
     >
-      {pending ? "Posting..." : "Post"}
+      {isPending ? "Posting..." : "Post"}
     </button>
   );
 }
@@ -23,7 +21,10 @@ export default function CommentForm() {
   const { data: session } = useSession();
   const formRef = useRef<HTMLFormElement>(null);
   const initialState: CommentActionState = { success: false };
-  const [state, formAction] = useFormState(addComment, initialState);
+  const [state, formAction, isPending] = useActionState(
+    addComment,
+    initialState
+  );
 
   if (!session?.user) return null;
 
@@ -42,7 +43,7 @@ export default function CommentForm() {
           autoComplete="off"
           required
         />
-        <SubmitButton />
+        <SubmitButton isPending={isPending} />
       </div>
       {state.error && (
         <p className="text-red-500 text-sm mt-2">{state.error}</p>
