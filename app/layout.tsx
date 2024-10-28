@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import ThemeToggle from "@/components/ThemeToggle";
 import { Providers } from "@/components/providers";
-import NoiseBackground from "@/components/NoiseBackground";
+// import NoiseBackground from "@/components/NoiseBackground";
 
 const inter = Inter({ subsets: ["latin"] });
 
