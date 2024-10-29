@@ -20,11 +20,9 @@ export default function CommentList({ comments }: { comments: Comment[] }) {
       <ul className="space-y-4">
         {comments.map(
           ({ id, username, name, avatar_url, content, created_at }) => (
-            <li key={id} className="flex items-start space-x-3">
+            <li key={id} className="flex items-start space-x-3 group">
               <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
-                <Link
-                  href={`https://github.com/${username}`}
-                >
+                <Link href={`https://github.com/${username}`}>
                   <Image
                     src={avatar_url}
                     alt={name}
@@ -48,7 +46,9 @@ export default function CommentList({ comments }: { comments: Comment[] }) {
                 </div>
                 <p className="text-sm">{content}</p>
               </div>
-              <DeleteCommentButton commentId={id} userName={username} />
+              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                <DeleteCommentButton commentId={id} userName={username} />
+              </div>
             </li>
           )
         )}
