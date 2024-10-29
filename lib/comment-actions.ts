@@ -20,12 +20,8 @@ export type CommentActionState = {
 };
 
 export async function getComments(): Promise<Comment[]> {
-  const result = await sql`
-    SELECT id, username, name, avatar_url, content, created_at::text
-    FROM comments
-    ORDER BY created_at DESC
-  `;
-
+  const result =
+    await sql`SELECT id, username, name, avatar_url, content, created_at::text FROM comments ORDER BY created_at DESC`;
   return result.rows.map((row) => ({
     id: row.id,
     username: row.username,
@@ -56,7 +52,6 @@ export async function addComment(
       VALUES (${session.user.username}, ${session.user.name}, ${session.user.image}, ${content})
       RETURNING id, username, name, avatar_url, content, created_at::text
     `;
-
     const newComment: Comment = {
       id: result.rows[0].id,
       username: result.rows[0].username,
@@ -65,11 +60,43 @@ export async function addComment(
       content: result.rows[0].content,
       created_at: result.rows[0].created_at,
     };
-
     revalidatePath("/");
     return { success: true, comment: newComment };
   } catch (error) {
     console.error("Error inserting comment:", error);
     return { error: "Failed to add comment" };
+  }
+}
+
+export async function deleteComment(
+  prevState: CommentActionState,
+  formData: FormData
+): Promise<CommentActionState> {
+  const session = await auth();
+  if (!session?.user) {
+    return { error: "Unauthorized" };
+  }
+
+  const commentId = formData.get("commentId");
+  if (!commentId || typeof commentId !== "string") {
+    return { error: "Invalid comment ID" };
+  }
+
+  try {
+    const result = await sql`
+      DELETE FROM comments
+      WHERE id = ${commentId} AND username = ${session.user.username}
+      RETURNING id
+    `;
+    if (result.rowCount === 0) {
+      return {
+        error: "Comment not found or you're not authorized to delete it",
+      };
+    }
+    revalidatePath("/");
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting comment:", error);
+    return { error: "Failed to delete comment" };
   }
 }
