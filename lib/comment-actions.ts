@@ -93,7 +93,7 @@ export async function deleteComment(
         error: "Comment not found or you're not authorized to delete it",
       };
     }
-    revalidatePath("/");
+    revalidatePath("/guestlog");
     return { success: true };
   } catch (error) {
     console.error("Error deleting comment:", error);
