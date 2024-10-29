@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import TimeAgo from "./TimeAgo";
@@ -13,7 +14,6 @@ type Comment = {
 };
 
 export default function CommentList({ comments }: { comments: Comment[] }) {
-
   return (
     <div className="space-y-4 p-4">
       <h2 className="text-lg font-bold mb-4">Comments</h2>
