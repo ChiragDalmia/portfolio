@@ -22,19 +22,23 @@ export default function CommentList({ comments }: { comments: Comment[] }) {
           ({ id, username, name, avatar_url, content, created_at }) => (
             <li key={id} className="flex items-start space-x-3">
               <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
-                <Image
-                  src={avatar_url}
-                  alt={name}
-                  width={40}
-                  height={40}
-                  className="object-cover"
-                />
+                <Link
+                  href={`https://github.com/${username}`}
+                >
+                  <Image
+                    src={avatar_url}
+                    alt={name}
+                    width={40}
+                    height={40}
+                    className="object-cover"
+                  />
+                </Link>
               </div>
               <div className="flex-1 space-y-1">
                 <div className="flex items-center gap-3">
                   <Link
                     href={`https://github.com/${username}`}
-                    className="font-medium"
+                    className="text-xs font-semibold"
                   >
                     {name}
                   </Link>
@@ -44,7 +48,7 @@ export default function CommentList({ comments }: { comments: Comment[] }) {
                 </div>
                 <p className="text-sm">{content}</p>
               </div>
-                <DeleteCommentButton commentId={id} userName={username} />
+              <DeleteCommentButton commentId={id} userName={username} />
             </li>
           )
         )}
