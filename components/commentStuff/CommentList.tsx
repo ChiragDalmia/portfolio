@@ -1,7 +1,6 @@
-"use client";
-import { timeAgo } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import TimeAgo from "./TimeAgo";
 
 type Comment = {
   id: string;
@@ -38,7 +37,7 @@ export default function CommentList({ comments }: { comments: Comment[] }) {
                     {name}
                   </Link>
                   <time dateTime={created_at} className="text-xs text-gray-400">
-                    {timeAgo(created_at)}
+                    <TimeAgo timestamp={created_at} />
                   </time>
                 </div>
                 <p className="text-sm ">{content}</p>
