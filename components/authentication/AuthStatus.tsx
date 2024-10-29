@@ -7,7 +7,10 @@ export function AuthStatus() {
   return status === "loading" ? (
     <button></button>
   ) : (
-    <button onClick={() => (status === "authenticated" ? signOut() : signIn())}>
+    <button
+      onClick={() => (status === "authenticated" ? signOut() : signIn())}
+      className="absolute top-3 -translate-x-1/2 right-0"
+    >
       Sign {status === "authenticated" ? "out" : "in"}
     </button>
   );
