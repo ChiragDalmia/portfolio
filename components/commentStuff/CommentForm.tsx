@@ -26,7 +26,7 @@ export default function CommentForm() {
     initialState
   );
 
-  // if (!session?.user) return null;
+  if (!session?.user) return null;
 
   return (
     <form
