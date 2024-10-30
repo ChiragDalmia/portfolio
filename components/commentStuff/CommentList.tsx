@@ -12,14 +12,17 @@ type Comment = {
   created_at: string;
 };
 
-export default function CommentList({ comments }: { comments: Comment[] }) {
+export default function Component({ comments }: { comments: Comment[] }) {
   return (
     <div className="space-y-4 p-4">
       <h2 className="text-lg font-bold mb-4">Comments</h2>
       <ul className="space-y-4">
         {comments.map(
           ({ id, username, name, avatar_url, content, created_at }) => (
-            <li key={id} className="flex items-start space-x-3">
+            <li
+              key={id}
+              className="flex items-start space-x-3 group relative  rounded-lg p-2 transition-colors"
+            >
               <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
                 <Link href={`https://github.com/${username}`}>
                   <Image
@@ -49,7 +52,7 @@ export default function CommentList({ comments }: { comments: Comment[] }) {
                 </div>
                 <p className="text-sm break-words">{content}</p>
               </div>
-              <div className="flex-shrink-0 opacity-0 hover:opacity-100 transition-opacity duration-200">
+              <div className="absolute right-2 top-2">
                 <DeleteCommentButton commentId={id} userName={username} />
               </div>
             </li>
