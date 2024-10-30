@@ -89,7 +89,8 @@ export async function deleteComment(
   try {
     const result = await sql`
       DELETE FROM comments
-      WHERE id = ${commentId} AND username = ${session.user.username}
+      WHERE id = ${commentId} 
+       AND (username = ${session.user.username} OR ${session.user.username} = 'ChiragDalmia')
       RETURNING id
     `;
     if (result.rowCount === 0) {

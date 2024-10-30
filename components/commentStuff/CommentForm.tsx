@@ -9,7 +9,7 @@ function SubmitButton({ isPending }: { isPending: boolean }) {
   return (
     <button
       type="submit"
-      className="absolute right-0 top-0 h-full px-4"
+      className="absolute right-0 top-0 h-full px-4 transition-opacity disabled:opacity-50"
       disabled={isPending}
     >
       {isPending ? "Posting..." : "Post"}
@@ -26,15 +26,18 @@ export default function CommentForm() {
     initialState
   );
 
-  if (!session?.user) return null;
+  // if (!session?.user) return null;
 
   return (
     <form
       ref={formRef}
       action={formAction}
-      className="fixed bottom-14 left-0 w-full flex justify-center"
+      className="fixed bottom-0 left-0 w-full bg-background/80 backdrop-blur-sm p-4"
     >
-      <div className="relative w-full max-w-96 h-12 bg-gray-100 dark:bg-gray-900 rounded-full">
+      {state.error && (
+        <p className="text-red-500 text-sm mt-2 text-center">{state.error} :(</p>
+      )}
+      <div className="relative w-full max-w-96 h-12 bg-gray-100 dark:bg-gray-900 rounded-full mx-auto">
         <input
           name="content"
           className="w-full h-full bg-transparent px-4 py-2 pr-16 rounded-full focus:outline-none focus:ring-2 focus:ring-primary"
@@ -45,9 +48,6 @@ export default function CommentForm() {
         />
         <SubmitButton isPending={isPending} />
       </div>
-      {state.error && (
-        <p className="text-red-500 text-sm mt-2">{state.error}</p>
-      )}
     </form>
   );
 }

@@ -6,7 +6,7 @@ export default async function CommentSection() {
   const comments: Comment[] = await getComments();
 
   return (
-    <section className="">
+    <section className="min-h-fit">
       <CommentList comments={comments} />
       <CommentForm />
     </section>
