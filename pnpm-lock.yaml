@@ -39,6 +39,9 @@ importers:
         specifier: ^0.7.4
         version: 0.7.4
     devDependencies:
+      '@types/mdx':
+        specifier: ^2.0.13
+        version: 2.0.13
       '@types/node':
         specifier: ^22.8.2
         version: 22.8.2
