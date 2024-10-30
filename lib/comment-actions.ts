@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_cache } from "next/cache";
 import { sql } from "@vercel/postgres";
 import { auth } from "@/lib/auth";
 
@@ -19,18 +19,22 @@ export type CommentActionState = {
   comment?: Comment;
 };
 
-export async function getComments(): Promise<Comment[]> {
-  const result =
-    await sql`SELECT id, username, name, avatar_url, content, created_at::text FROM comments ORDER BY created_at DESC`;
-  return result.rows.map((row) => ({
-    id: row.id,
-    username: row.username,
-    name: row.name,
-    avatar_url: row.avatar_url,
-    content: row.content,
-    created_at: row.created_at,
-  }));
-}
+export const getComments = unstable_cache(
+  async (): Promise<Comment[]> => {
+    const result =
+      await sql`SELECT id, username, name, avatar_url, content, created_at::text FROM comments ORDER BY created_at DESC`;
+    return result.rows.map((row) => ({
+      id: row.id,
+      username: row.username,
+      name: row.name,
+      avatar_url: row.avatar_url,
+      content: row.content,
+      created_at: row.created_at,
+    }));
+  },
+  ["comments"],
+  { revalidate: 1 } // Revalidate every second
+);
 
 export async function addComment(
   prevState: CommentActionState,
