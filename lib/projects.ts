@@ -3,14 +3,19 @@ export const projectsData = [
     name: "✨HackCanada",
     url: "https://staging.hackcanada.org/",
     description:
-      "The most, 'are-you-sure-you-want-this?' design request I’ve ever tackled.",
+    "The most, 'are-you-sure-you-want-this?' design request I’ve ever tackled.",
   },
   {
     name: "ARchatPet",
     // url: "https://archatpet.vercel.app/",
     url: "https://www.bringthembackto.us/",
     description:
-      "Turn a simple photo of your pet into a 3D model and chat with it in an AR world.",
+    "Turn a simple photo of your pet into a 3D model and chat with it in an AR world.",
+  },
+  {
+    name: "AnatomyAR",
+    url: "https://ctrlhack2024.vercel.app/",
+    description: "What IF you could teach Human Anatomy through immersive AR? Thats what this app does.",
   },
   {
     name: "ScanTerra",
@@ -37,7 +42,6 @@ export const projectsData = [
   {
     name: "VanillaJs Corner",
     url: "https://myvanillajs.netlify.app/",
-    description:
-      "A collection of simple JavaScript projects",
+    description: "A collection of simple JavaScript projects",
   },
 ];
