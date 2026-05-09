@@ -5,17 +5,22 @@ export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
-    setIsDark(document.documentElement.classList.contains("dark"));
+    const saved = localStorage.getItem("theme");
+    const dark = saved ? saved === "dark" : document.documentElement.classList.contains("dark");
+    setIsDark(dark);
+    document.documentElement.classList.toggle("dark", dark);
   }, []);
 
   const toggleTheme = () => {
-    setIsDark(!isDark);
-    document.documentElement.classList.toggle("dark");
+    const next = !isDark;
+    setIsDark(next);
+    document.documentElement.classList.toggle("dark", next);
+    localStorage.setItem("theme", next ? "dark" : "light");
   };
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 absolute top-5 right-0 rounded-full bg-transparent text-foreground z-50"
+      className="p-2 rounded-full bg-transparent text-foreground"
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
     >
       {isDark ? (
