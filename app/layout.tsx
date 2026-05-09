@@ -56,7 +56,14 @@ export default function RootLayout({
     >
       <body className="min-h-[100vh] flex flex-col">
         <div className="flex-grow flex flex-col p-4">
-          <header className="max-w-[70ch] mx-auto w-full relative">
+          <header className="max-w-[70ch] mx-auto w-full relative flex items-center justify-between">
+            <nav aria-label="Main navigation">
+              <ul className="flex gap-4 text-sm list-none m-0 p-0">
+                <li className="m-0"><Link href="/">home</Link></li>
+                <li className="m-0"><Link href="/projects">projects</Link></li>
+                <li className="m-0"><Link href="/guestlog">guestlog</Link></li>
+              </ul>
+            </nav>
             <ThemeToggle />
           </header>
           <main className="max-w-[70ch] mx-auto w-full space-y-6 flex-grow pt-4 md:pt-8">
