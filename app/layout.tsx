@@ -55,7 +55,7 @@ export default function RootLayout({
       className={`${inter.className} [scrollbar-gutter:stable] antialiased tracking-tight`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: `(function(){var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.classList.remove('dark')}else{document.documentElement.classList.add('dark')}})()` }} />
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.classList.remove('dark')}else{document.documentElement.classList.add('dark')}}catch(e){document.documentElement.classList.add('dark')}})()` }} />
       </head>
       <body className="min-h-[100vh] flex flex-col">
         <div className="flex-grow flex flex-col p-4">
