@@ -52,8 +52,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.className} [scrollbar-gutter:stable] dark antialiased tracking-tight`}
+      className={`${inter.className} [scrollbar-gutter:stable] antialiased tracking-tight`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `(function(){var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.classList.remove('dark')}else{document.documentElement.classList.add('dark')}})()` }} />
+      </head>
       <body className="min-h-[100vh] flex flex-col">
         <div className="flex-grow flex flex-col p-4">
           <header className="max-w-[70ch] mx-auto w-full relative flex items-center justify-between">
