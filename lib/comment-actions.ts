@@ -1,7 +1,7 @@
 "use server";
 
-import { revalidatePath, unstable_cache } from "next/cache";
-import { sql } from "@vercel/postgres";
+import { revalidatePath, updateTag, unstable_cache } from "next/cache";
+import { sql } from "@/lib/db";
 import { auth } from "@/lib/auth";
 
 export type Comment = {
@@ -33,7 +33,7 @@ export const getComments = unstable_cache(
     }));
   },
   ["comments"],
-  { revalidate: 1 } // Revalidate every second
+  { revalidate: 1, tags: ["comments"] } // Revalidate every second
 );
 
 export async function addComment(
@@ -48,6 +48,9 @@ export async function addComment(
   const content = formData.get("content");
   if (!content || typeof content !== "string" || content.trim() === "") {
     return { error: "Comment cannot be empty" };
+  }
+  if (content.length > 500) {
+    return { error: "Comment is too long (max 500 characters)" };
   }
 
   try {
@@ -64,7 +67,8 @@ export async function addComment(
       content: result.rows[0].content,
       created_at: result.rows[0].created_at,
     };
-    revalidatePath("/");
+    updateTag("comments");
+    revalidatePath("/guestlog");
     return { success: true, comment: newComment };
   } catch (error) {
     console.error("Error inserting comment:", error);
@@ -98,6 +102,7 @@ export async function deleteComment(
         error: "Comment not found or you're not authorized to delete it",
       };
     }
+    updateTag("comments");
     revalidatePath("/guestlog");
     return { success: true };
   } catch (error) {
