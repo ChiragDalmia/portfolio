@@ -23,7 +23,7 @@ export default function Component({ comments }: { comments: Comment[] }) {
               key={id}
               className="flex items-start space-x-3 group relative  rounded-lg p-2 transition-colors"
             >
-              <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0">
                 <Link href={`https://github.com/${username}`}>
                   <Image
                     src={avatar_url}
@@ -45,12 +45,13 @@ export default function Component({ comments }: { comments: Comment[] }) {
                   </Link>
                   <time
                     dateTime={created_at}
-                    className="text-xs text-gray-400 flex-shrink-0"
+                    className="text-xs text-gray-400 shrink-0"
+                    suppressHydrationWarning
                   >
                     <TimeAgo timestamp={created_at} />
                   </time>
                 </div>
-                <p className="text-sm break-words">{content}</p>
+                <p className="text-sm wrap-break-word">{content}</p>
               </div>
               <div className="absolute right-2 top-2">
                 <DeleteCommentButton commentId={id} userName={username} />

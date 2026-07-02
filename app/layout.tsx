@@ -52,13 +52,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.className} [scrollbar-gutter:stable] antialiased tracking-tight`}
+      suppressHydrationWarning
+      className={`${inter.className} scrollbar-gutter-stable antialiased tracking-tight`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.classList.remove('dark')}else{document.documentElement.classList.add('dark')}}catch(e){document.documentElement.classList.add('dark')}})()` }} />
       </head>
-      <body className="min-h-[100vh] flex flex-col">
-        <div className="flex-grow flex flex-col p-4">
+      <body className="min-h-screen flex flex-col">
+        <div className="grow flex flex-col p-4">
           <header className="max-w-[70ch] mx-auto w-full relative flex items-center justify-between">
             <nav aria-label="Main navigation">
               <ul className="flex gap-4 text-sm list-none m-0 p-0">
@@ -69,7 +70,7 @@ export default function RootLayout({
             </nav>
             <ThemeToggle />
           </header>
-          <main className="max-w-[70ch] mx-auto w-full space-y-6 flex-grow pt-4 md:pt-8">
+          <main className="max-w-[70ch] mx-auto w-full space-y-6 grow pt-4 md:pt-8">
             <Providers>{children}</Providers>
           </main>
         </div>

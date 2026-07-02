@@ -5,9 +5,13 @@ export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
+    // One-time sync of React state with the theme already applied by the
+    // blocking inline script in <head> (localStorage/DOM are unavailable
+    // during SSR, so this can't be a lazy useState initializer).
     try {
       const saved = localStorage.getItem("theme");
       const dark = saved ? saved === "dark" : document.documentElement.classList.contains("dark");
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsDark(dark);
       document.documentElement.classList.toggle("dark", dark);
     } catch {
