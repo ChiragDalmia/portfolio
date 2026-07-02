@@ -74,7 +74,7 @@ export function LikeCounter({ slug, initialCount }: LikeButtonProps) {
     <button
       onClick={handleLike}
       disabled={isLoading}
-      className="group flex items-center justify-center px-2 py-1 bg-background border-2 border-foreground rounded-full cursor-pointer transition-all duration-200 ease-in-out outline-none active:scale-95 ml-auto"
+      className="group flex items-center justify-center px-2 py-1 bg-background border-2 border-foreground rounded-full cursor-pointer transition-all duration-200 ease-in-out outline-hidden active:scale-95 ml-auto"
       aria-label="Like"
     >
       <svg

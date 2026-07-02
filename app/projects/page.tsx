@@ -32,13 +32,13 @@ function ProjectCard({ project, index }: ProjectCardProps) {
     >
       <article
         className={`
-          relative h-full bg-card/70 backdrop-blur-sm border border-border/50
+          relative h-full bg-card/70 backdrop-blur-xs border border-border/50
           rounded-2xl p-6 transition-all duration-500 ease-out
           hover:bg-card hover:border-border hover:shadow-xl hover:shadow-border/20
           hover:-translate-y-2 hover:scale-[1.02]
           ${
             isFeatured
-              ? "ring-1 ring-amber-200/50 bg-gradient-to-br from-amber-50/30 dark:from-amber-950/20 to-card/70"
+              ? "ring-1 ring-amber-200/50 bg-linear-to-br from-amber-50/30 dark:from-amber-950/20 to-card/70"
               : ""
           }
         `}
@@ -48,17 +48,17 @@ function ProjectCard({ project, index }: ProjectCardProps) {
       >
         {/* Featured Badge */}
         {isFeatured && (
-          <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg">
+          <div className="absolute -top-2 -right-2 w-6 h-6 bg-linear-to-r from-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg">
             <span className="text-white text-xs">✨</span>
           </div>
         )}
 
         {/* Image Placeholder - Optimized for future image integration */}
-        <div className="w-full h-48 bg-gradient-to-br from-muted to-muted/60 rounded-xl mb-6 overflow-hidden relative group-hover:shadow-inner transition-all duration-300">
-          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="w-full h-48 bg-linear-to-br from-muted to-muted/60 rounded-xl mb-6 overflow-hidden relative group-hover:shadow-inner transition-all duration-300">
+          <div className="absolute inset-0 bg-linear-to-br from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-16 h-16 bg-card/80 rounded-full flex items-center justify-center shadow-sm">
-              <div className="w-8 h-8 bg-gradient-to-br from-muted-foreground/40 to-muted-foreground/60 rounded-lg opacity-60" />
+            <div className="w-16 h-16 bg-card/80 rounded-full flex items-center justify-center shadow-xs">
+              <div className="w-8 h-8 bg-linear-to-br from-muted-foreground/40 to-muted-foreground/60 rounded-lg opacity-60" />
             </div>
           </div>
         </div>
@@ -94,7 +94,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
         </div>
 
         {/* Subtle Border Gradient */}
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-gray-200/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+        <div className="absolute inset-0 rounded-2xl bg-linear-to-r from-transparent via-gray-200/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
       </article>
     </a>
   );
