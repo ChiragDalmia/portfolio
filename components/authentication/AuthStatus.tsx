@@ -4,9 +4,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 
 export function AuthStatus() {
   const { status } = useSession();
-  return status === "loading" ? (
-    <button></button>
-  ) : (
+  return status === "loading" ? null : (
     <button
       onClick={() => (status === "authenticated" ? signOut() : signIn())}
       className="absolute md:-top-2 top-3 -translate-x-1/2 right-3"
