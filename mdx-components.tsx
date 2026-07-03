@@ -64,7 +64,12 @@ const components: MDXComponents = {
     );
   },
   code: ({ children, ...props }: ComponentPropsWithoutRef<"code">) => {
-    const codeHTML = highlight(children as string);
+    // highlight() only accepts a string; code with nested markup (e.g.
+    // <code><em>x</em></code>) renders unhighlighted instead of throwing.
+    if (typeof children !== "string") {
+      return <code {...props}>{children}</code>;
+    }
+    const codeHTML = highlight(children);
     return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
   },
   Table: ({ data }: { data: { headers: string[]; rows: string[][] } }) => (
