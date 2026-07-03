@@ -12,9 +12,33 @@ const PROJECT_SLUGS = new Set(
 );
 const COMMENT_SLUG =
   /^comment:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const COMMENT_PREFIX = "comment:";
 
-function isLikeableSlug(slug: string): boolean {
-  return slug === "site" || PROJECT_SLUGS.has(slug) || COMMENT_SLUG.test(slug);
+function commentIdFromSlug(slug: string): string | null {
+  if (!slug.startsWith(COMMENT_PREFIX)) return null;
+  const id = slug.slice(COMMENT_PREFIX.length);
+  return id.length > 0 && id.length <= 100 ? id : null;
+}
+
+async function isExistingCommentSlug(slug: string): Promise<boolean> {
+  const commentId = commentIdFromSlug(slug);
+  if (!commentId) return false;
+  if (COMMENT_SLUG.test(slug)) return true;
+
+  const result = await sql`
+    SELECT EXISTS (
+      SELECT 1 FROM comments WHERE id::text = ${commentId}
+    ) AS exists
+  `;
+  return Boolean(result.rows[0]?.exists);
+}
+
+async function isLikeableSlug(slug: string): Promise<boolean> {
+  return (
+    slug === "site" ||
+    PROJECT_SLUGS.has(slug) ||
+    (await isExistingCommentSlug(slug))
+  );
 }
 
 const rateLimitCache = new Map<string, number[]>();
@@ -97,7 +121,22 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
   }
 
-  if (typeof slug !== "string" || !isLikeableSlug(slug)) {
+  if (typeof slug !== "string") {
+    return NextResponse.json({ error: "Invalid slug" }, { status: 400 });
+  }
+
+  let likeableSlug;
+  try {
+    likeableSlug = await isLikeableSlug(slug);
+  } catch (error) {
+    console.error("Failed to validate like slug:", error);
+    return NextResponse.json(
+      { error: "Failed to validate like slug" },
+      { status: 500 }
+    );
+  }
+
+  if (!likeableSlug) {
     return NextResponse.json({ error: "Invalid slug" }, { status: 400 });
   }
 
