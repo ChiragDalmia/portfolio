@@ -1,12 +1,11 @@
-"use client"
 import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div>
-      <h2>Page Under Construction</h2>
-      <p>I am working on something great. Please check back soon!</p>
+    <section>
+      <h1 className="mt-0">Page not found</h1>
+      <p>The page you&apos;re looking for doesn&apos;t exist (or moved).</p>
       <Link href="/">Back to Home</Link>
-    </div>
+    </section>
   );
 }
