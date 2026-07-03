@@ -55,28 +55,30 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col">
-        <div className="grow flex flex-col p-4">
-          <header className="max-w-[70ch] mx-auto w-full relative flex items-center justify-between">
-            <nav aria-label="Main navigation">
-              <ul className="flex gap-4 text-sm list-none m-0 p-0">
-                <li className="m-0">
-                  <Link href="/">home</Link>
-                </li>
-                <li className="m-0">
-                  <Link href="/projects">projects</Link>
-                </li>
-                <li className="m-0">
-                  <Link href="/guestlog">guestlog</Link>
-                </li>
-              </ul>
-            </nav>
-            <ThemeToggle />
-          </header>
-          <main className="max-w-[70ch] mx-auto w-full space-y-6 grow pt-4 md:pt-8">
-            <Providers>{children}</Providers>
-          </main>
-        </div>
-        <Footer />
+        <Providers>
+          <div className="grow flex flex-col p-4">
+            <header className="max-w-[70ch] mx-auto w-full relative flex items-center justify-between">
+              <nav aria-label="Main navigation">
+                <ul className="flex gap-4 text-sm list-none m-0 p-0">
+                  <li className="m-0">
+                    <Link href="/">home</Link>
+                  </li>
+                  <li className="m-0">
+                    <Link href="/projects">projects</Link>
+                  </li>
+                  <li className="m-0">
+                    <Link href="/guestlog">guestlog</Link>
+                  </li>
+                </ul>
+              </nav>
+              <ThemeToggle />
+            </header>
+            <main className="max-w-[70ch] mx-auto w-full space-y-6 grow pt-4 md:pt-8">
+              {children}
+            </main>
+          </div>
+          <Footer />
+        </Providers>
         <Analytics />
       </body>
     </html>

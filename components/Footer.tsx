@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 import LikeButton from "@/components/LikeButton";
 
 const links = [
@@ -12,8 +13,11 @@ const links = [
 
 export default function Footer() {
   const pathname = usePathname();
+  const { status } = useSession();
   // The guestlog's fixed comment input owns the bottom of the viewport.
-  if (pathname.startsWith("/guestlog")) return null;
+  if (pathname.startsWith("/guestlog") && status !== "unauthenticated") {
+    return null;
+  }
 
   return (
     <footer className="mt-auto py-4 px-4">
