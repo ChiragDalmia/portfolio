@@ -227,7 +227,11 @@ export default function LikeButton({
       type="button"
       onClick={handleToggle}
       aria-pressed={liked}
-      aria-label={liked ? "Unlike" : "Like"}
+      // The label carries the count because aria-label hides the visible
+      // count text from screen readers.
+      aria-label={`${liked ? "Unlike" : "Like"}${
+        count === null ? "" : `, ${count} ${count === 1 ? "like" : "likes"}`
+      }`}
       className={`group/like inline-flex items-center gap-1 align-middle bg-transparent text-xs text-muted-foreground cursor-pointer select-none transition-opacity duration-200 ${className}`}
     >
       <span className="relative inline-flex" aria-hidden="true">
