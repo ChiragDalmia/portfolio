@@ -2,6 +2,9 @@ import { personalProjects, hackathonProjects } from "@/lib/projects";
 import Link from "next/link";
 import React from "react";
 
+import ProjectList from "@/components/ProjectList";
+import Section from "@/components/Section";
+
 const experienceData = [
   {
     dateRange: "Feb. 2025 - Mar. 2026",
@@ -56,19 +59,11 @@ const Page = () => {
       </section>
 
       <Section title="Personal Projects">
-        <ul className="space-y-1">
-          {personalProjects.map((project) => (
-            <Entry key={project.name} {...project} />
-          ))}
-        </ul>
+        <ProjectList projects={personalProjects} />
       </Section>
 
       <Section title="Some of My Fav Hackathon Projects">
-        <ul className="space-y-1">
-          {hackathonProjects.map((project) => (
-            <Entry key={project.name} {...project} />
-          ))}
-        </ul>
+        <ProjectList projects={hackathonProjects} />
       </Section>
 
       <Section title="Experience">
@@ -81,41 +76,6 @@ const Page = () => {
     </>
   );
 };
-
-function Section({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) {
-  const id = title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  return (
-    <section aria-labelledby={id} className="pt-6">
-      <h2 id={id} className="mt-0 mb-4">
-        {title}
-      </h2>
-      {children}
-    </section>
-  );
-}
-
-function Entry({
-  name,
-  url,
-  description,
-}: {
-  name: string;
-  url: string;
-  description?: string;
-}) {
-  return (
-    <li className="ml-0">
-      <Link href={url}>{name.replace("✨", "")}</Link>
-      {description && <> - {description}</>}
-    </li>
-  );
-}
 
 function ExperienceEntry({
   dateRange,

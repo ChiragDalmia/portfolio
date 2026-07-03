@@ -87,9 +87,12 @@ export const hackathonProjects: Project[] = [
     description:
       "Peer-to-peer image sharing platform on the go, that preserves quality",
   },
+  {
+    name: "CanUDance",
+    url: "https://devpost.com/software/canudance",
+    githubUrl: "https://github.com/jamesjamcow/starterhacks",
+    description:
+      "AI app that scores your dance moves from your camera feed in real time.",
+  },
 ];
 
-export const projectsData: Project[] = [
-  ...personalProjects,
-  ...hackathonProjects,
-];
