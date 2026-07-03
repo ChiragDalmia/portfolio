@@ -16,24 +16,24 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   title: {
-    default: "Chirag Dalmia | Front-end Developer",
+    default: "Chirag Dalmia | Full Stack Developer",
     template: "%s | Chirag Dalmia",
   },
   description:
-    "Portfolio of Chirag Dalmia, a Front-end Developer specializing in modern web technologies.",
+    "Portfolio of Chirag Dalmia, a Full Stack Developer specializing in modern web technologies.",
   openGraph: {
     siteName: "Chirag Dalmia",
     url: "https://chiragdalmia.com",
     type: "website",
-    title: "Chirag Dalmia | Front-end Developer",
+    title: "Chirag Dalmia | Full Stack Developer",
     description:
-      "Portfolio of Chirag Dalmia, a Front-end Developer specializing in modern web technologies.",
+      "Portfolio of Chirag Dalmia, a Full Stack Developer specializing in modern web technologies.",
     images: [
       {
         url: "https://chiragdalmia.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Chirag Dalmia - Front-end Developer",
+        alt: "Chirag Dalmia - Full Stack Developer",
       },
     ],
   },
@@ -56,16 +56,26 @@ export default function RootLayout({
       className={`${inter.className} scrollbar-gutter-stable antialiased tracking-tight`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.classList.remove('dark')}else{document.documentElement.classList.add('dark')}}catch(e){document.documentElement.classList.add('dark')}})()` }} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.classList.remove('dark')}else{document.documentElement.classList.add('dark')}}catch(e){document.documentElement.classList.add('dark')}})()`,
+          }}
+        />
       </head>
       <body className="min-h-screen flex flex-col">
         <div className="grow flex flex-col p-4">
           <header className="max-w-[70ch] mx-auto w-full relative flex items-center justify-between">
             <nav aria-label="Main navigation">
               <ul className="flex gap-4 text-sm list-none m-0 p-0">
-                <li className="m-0"><Link href="/">home</Link></li>
-                <li className="m-0"><Link href="/projects">projects</Link></li>
-                <li className="m-0"><Link href="/guestlog">guestlog</Link></li>
+                <li className="m-0">
+                  <Link href="/">home</Link>
+                </li>
+                <li className="m-0">
+                  <Link href="/projects">projects</Link>
+                </li>
+                <li className="m-0">
+                  <Link href="/guestlog">guestlog</Link>
+                </li>
               </ul>
             </nav>
             <ThemeToggle />
@@ -92,11 +102,8 @@ function Footer() {
   return (
     <footer className="mt-auto py-4">
       <div className="flex justify-center items-center max-w-[70ch] mx-auto text-sm text-gray-500 dark:text-gray-400">
-       
         <nav aria-label="Social media links">
           <ul className="flex space-x-4">
-
-
             {links.map((link) => (
               <li key={link.name}>
                 <Link

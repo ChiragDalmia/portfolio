@@ -11,10 +11,10 @@ const Page = () => {
           About Me
         </h2>
         <p>
-          I am a Software dev crafting{" "}
+          I am a Full Stack dev crafting{" "}
           <Link href="/projects">cool web stuff</Link>. I love{" "}
-          <Link href="/yaps/spline-projects">chatting about code</Link> and playing with
-          3D Design. Drop by my{" "}
+          <Link href="/yaps/spline-projects">chatting about code</Link> and
+          playing with 3D Design. Drop by my{" "}
           <Link href="/guestlog">digital guestbook</Link> and say hi!
         </p>
       </section>
