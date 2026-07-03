@@ -3,6 +3,112 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+  --animate-heart-pop: heart-pop 450ms cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  --animate-heart-unpop: heart-unpop 350ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-like-ring: like-ring 500ms cubic-bezier(0.22, 1, 0.36, 1) 60ms both;
+  --animate-like-particle: like-particle 600ms cubic-bezier(0.22, 1, 0.36, 1) 60ms both;
+  --animate-roll-up-in: roll-up-in 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-roll-up-out: roll-up-out 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-roll-down-in: roll-down-in 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-roll-down-out: roll-down-out 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes heart-pop {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    25% {
+      transform: scale(0.7);
+    }
+    55% {
+      transform: scale(1.3);
+    }
+    80% {
+      transform: scale(0.95);
+    }
+  }
+
+  @keyframes heart-unpop {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    40% {
+      transform: scale(0.78);
+    }
+  }
+
+  @keyframes like-ring {
+    from {
+      transform: scale(0.4);
+      opacity: 0.5;
+    }
+    to {
+      transform: scale(2.1);
+      opacity: 0;
+    }
+  }
+
+  @keyframes like-particle {
+    0% {
+      transform: translate(0, 0) scale(0);
+      opacity: 0.9;
+    }
+    30% {
+      transform: translate(calc(var(--tx) * 0.55), calc(var(--ty) * 0.55))
+        scale(1);
+      opacity: 0.9;
+    }
+    100% {
+      transform: translate(var(--tx), var(--ty)) scale(0.2);
+      opacity: 0;
+    }
+  }
+
+  @keyframes roll-up-in {
+    from {
+      transform: translateY(110%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes roll-up-out {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-110%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes roll-down-in {
+    from {
+      transform: translateY(-110%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes roll-down-out {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(110%);
+      opacity: 0;
+    }
+  }
+
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
 
