@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import TimeAgo from "./TimeAgo";
 import DeleteCommentButton from "./DeleteComment";
+import LikeButton from "@/components/LikeButton";
 
 type Comment = {
   id: string;
@@ -50,6 +51,7 @@ export default function Component({ comments }: { comments: Comment[] }) {
                   >
                     <TimeAgo timestamp={created_at} />
                   </time>
+                  <LikeButton slug={`comment:${id}`} />
                 </div>
                 <p className="text-sm wrap-break-word">{content}</p>
               </div>
