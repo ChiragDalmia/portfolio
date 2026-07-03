@@ -17,7 +17,7 @@ export default function Footer() {
 
   return (
     <footer className="mt-auto py-4 px-4">
-      <div className="relative flex justify-center items-center max-w-[70ch] mx-auto text-sm text-gray-500 dark:text-gray-400">
+      <div className="relative flex justify-center items-center max-w-[70ch] mx-auto text-sm text-gray-600 dark:text-gray-400">
         <nav aria-label="Social media links">
           <ul className="flex gap-4 list-none m-0 p-0">
             {links.map((link) => (
