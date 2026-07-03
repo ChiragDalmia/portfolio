@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { Project } from "@/lib/projects";
 import LikeButton from "@/components/LikeButton";
 
@@ -16,17 +15,21 @@ function ProjectEntry({ name, url, githubUrl, description }: Project) {
   const showSource = githubUrl && githubUrl !== url;
   return (
     <li className="ml-0 group">
-      <Link href={url}>{name.replace("✨", "")}</Link>
+      <a href={url} target="_blank" rel="noopener noreferrer">
+        {name}
+      </a>
       {description && <> - {description}</>}
       {showSource && (
         <>
           {" "}
-          <Link
+          <a
             href={githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-xs text-muted-foreground whitespace-nowrap"
           >
             (Github)
-          </Link>
+          </a>
         </>
       )}
       {/* Hidden until hover on pointer devices, but always visible once
