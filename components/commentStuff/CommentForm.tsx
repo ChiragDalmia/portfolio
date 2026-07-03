@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef } from "react";
 import { useSession } from "next-auth/react";
 import { useActionState } from "react";
 import { addComment, type CommentActionState } from "@/lib/comment-actions";
@@ -19,7 +18,6 @@ function SubmitButton({ isPending }: { isPending: boolean }) {
 
 export default function CommentForm() {
   const { data: session } = useSession();
-  const formRef = useRef<HTMLFormElement>(null);
   const initialState: CommentActionState = { success: false };
   const [state, formAction, isPending] = useActionState(
     addComment,
@@ -33,7 +31,6 @@ export default function CommentForm() {
       {/* Reserve scroll space so the fixed bar doesn't cover the last comment. */}
       <div className="h-24" aria-hidden="true" />
       <form
-        ref={formRef}
         action={formAction}
         className="fixed bottom-0 left-0 w-full bg-background/80 backdrop-blur-xs p-4"
       >
