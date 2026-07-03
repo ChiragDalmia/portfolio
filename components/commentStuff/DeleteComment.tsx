@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import { deleteComment, type CommentActionState } from "@/lib/comment-actions";
 import { useSession } from "next-auth/react";
+import { ADMIN_USERNAME } from "@/lib/constants";
 
 type DeleteCommentButtonProps = {
   commentId: string;
@@ -19,16 +20,26 @@ export default function Component({
 
   const canDelete =
     session?.user?.username === userName ||
-    session?.user?.username === "ChiragDalmia";
+    session?.user?.username === ADMIN_USERNAME;
 
   if (!canDelete) return <div className="w-8" aria-hidden="true" />;
 
   return (
-    <form action={deleteAction}>
+    <form
+      action={deleteAction}
+      // Deleting is permanent, so a stray tap shouldn't be enough.
+      onSubmit={(e) => {
+        if (!confirm("Delete this comment? This can't be undone.")) {
+          e.preventDefault();
+        }
+      }}
+    >
       <input type="hidden" name="commentId" value={commentId} />
       <button
         type="submit"
-        className="text-red-500 hover:text-red-700 p-1 opacity-0 group-hover:opacity-100 transition-all duration-200 bg-transparent"
+        // Hidden until hover on pointer devices, but always visible on
+        // keyboard focus and on touch screens (no hover to reveal it).
+        className="text-red-500 hover:text-red-700 p-1 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 pointer-coarse:opacity-100 transition-all duration-200 bg-transparent"
         aria-label="Delete comment"
       >
         <svg
@@ -50,7 +61,9 @@ export default function Component({
         </svg>
       </button>
       {state.error && (
-        <p className="text-red-500 text-sm absolute mt-2">{state.error}</p>
+        <p className="text-red-500 text-sm absolute mt-2 right-0 whitespace-nowrap">
+          {state.error}
+        </p>
       )}
     </form>
   );
