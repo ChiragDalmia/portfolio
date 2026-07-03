@@ -18,7 +18,7 @@ export const personalProjects: Project[] = [
     url: "https://codementor-ai.chiragdalmia.com/",
     githubUrl: "https://github.com/ChiragDalmia/codementor-ai",
     description:
-      "AI mentor that reviews your code and guides you toward better solutions.",
+      "AI mentor that reviews your code and guides you.",
   },
   {
     name: "Portfolio v1.0",

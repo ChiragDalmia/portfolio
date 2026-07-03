@@ -228,7 +228,7 @@ export default function LikeButton({
       onClick={handleToggle}
       aria-pressed={liked}
       aria-label={liked ? "Unlike" : "Like"}
-      className={`group/like inline-flex items-center gap-1 align-middle text-xs text-muted-foreground cursor-pointer select-none transition-opacity duration-200 ${className}`}
+      className={`group/like inline-flex items-center gap-1 align-middle bg-transparent text-xs text-muted-foreground cursor-pointer select-none transition-opacity duration-200 ${className}`}
     >
       <span className="relative inline-flex" aria-hidden="true">
         {burstKey > 0 && (
