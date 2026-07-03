@@ -102,6 +102,7 @@ export async function deleteComment(
         error: "Comment not found or you're not authorized to delete it",
       };
     }
+    await sql`DELETE FROM likes WHERE slug = ${`comment:${commentId}`}`;
     updateTag("comments");
     revalidatePath("/guestlog");
     return { success: true };
