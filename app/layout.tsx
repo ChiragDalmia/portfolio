@@ -7,21 +7,20 @@ import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
 import Footer from "@/components/Footer";
 import { Providers } from "@/components/providers";
-// import NoiseBackground from "@/components/NoiseBackground";
 
 const inter = Inter({ subsets: ["latin"] });
 
+// The canonical URL is set per page (see app/page.tsx); putting it here
+// would mark every page as a duplicate of the homepage.
 export const metadata: Metadata = {
   metadataBase: new URL("https://chiragdalmia.com"),
-  alternates: {
-    canonical: "/",
-  },
   title: {
     default: "Chirag Dalmia | Full Stack Developer",
     template: "%s | Chirag Dalmia",
   },
   description:
     "Portfolio of Chirag Dalmia, a Full Stack Developer specializing in modern web technologies.",
+  // og:image comes from the app/opengraph-image.png file convention.
   openGraph: {
     siteName: "Chirag Dalmia",
     url: "https://chiragdalmia.com",
@@ -29,14 +28,6 @@ export const metadata: Metadata = {
     title: "Chirag Dalmia | Full Stack Developer",
     description:
       "Portfolio of Chirag Dalmia, a Full Stack Developer specializing in modern web technologies.",
-    images: [
-      {
-        url: "https://chiragdalmia.com/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Chirag Dalmia - Full Stack Developer",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -87,7 +78,6 @@ export default function RootLayout({
         </div>
         <Footer />
         <Analytics />
-        {/* <NoiseBackground /> */}
       </body>
     </html>
   );

@@ -1,9 +1,16 @@
 import { personalProjects, hackathonProjects } from "@/lib/projects";
 import Link from "next/link";
 import React from "react";
+import type { Metadata } from "next";
 
 import ProjectList from "@/components/ProjectList";
 import Section from "@/components/Section";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 const experienceData = [
   {
