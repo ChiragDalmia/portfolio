@@ -28,9 +28,32 @@ function rateLimit(ip: string): boolean {
   if (recentRequests.length >= MAX_REQUESTS) return false;
 
   recentRequests.push(now);
-  if (rateLimitCache.size > 1000) rateLimitCache.clear();
+  // Prune only expired entries so an over-limit IP can't get a fresh
+  // allowance just because someone else's request triggered a cleanup.
+  if (rateLimitCache.size > 1000) {
+    for (const [key, times] of rateLimitCache) {
+      if (times.every((time) => now - time >= RATE_LIMIT_WINDOW)) {
+        rateLimitCache.delete(key);
+      }
+    }
+  }
   rateLimitCache.set(ip, recentRequests);
   return true;
+}
+
+// Clients can send their own x-forwarded-for values, which proxies prepend
+// to; only the entry appended by the platform's own proxy (the last one) is
+// trustworthy. Note the cache above is per serverless instance, so the limit
+// is approximate across instances — accepted for this traffic.
+function clientIp(request: Request): string {
+  return (
+    (request.headers.get("x-forwarded-for") ?? "")
+      .split(",")
+      .at(-1)
+      ?.trim() ||
+    request.headers.get("x-real-ip")?.trim() ||
+    "unknown"
+  );
 }
 
 export async function GET(request: Request) {
@@ -43,8 +66,16 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "slugs is required" }, { status: 400 });
   }
 
-  const result =
-    await sql`SELECT slug, count FROM likes WHERE slug = ANY(${slugs})`;
+  let result;
+  try {
+    result = await sql`SELECT slug, count FROM likes WHERE slug = ANY(${slugs})`;
+  } catch (error) {
+    console.error("Failed to load like counts:", error);
+    return NextResponse.json(
+      { error: "Failed to load like counts" },
+      { status: 500 }
+    );
+  }
 
   const counts: Record<string, number> = {};
   for (const slug of slugs) counts[slug] = 0;
@@ -54,10 +85,7 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const ip = (request.headers.get("x-forwarded-for") ?? "unknown")
-    .split(",")[0]
-    .trim();
-  if (!rateLimit(ip)) {
+  if (!rateLimit(clientIp(request))) {
     return NextResponse.json({ error: "Rate limit exceeded" }, { status: 429 });
   }
 
@@ -79,23 +107,31 @@ export async function POST(request: Request) {
 
   // One like per device is enforced client-side (localStorage), and the
   // rate limit bounds abuse from clients that bypass it.
-  if (action === "unlike") {
+  try {
+    if (action === "unlike") {
+      const result = await sql`
+        UPDATE likes
+        SET count = GREATEST(likes.count - 1, 0)
+        WHERE slug = ${slug}
+        RETURNING count
+      `;
+      return NextResponse.json({ count: Number(result.rows[0]?.count ?? 0) });
+    }
+
     const result = await sql`
-      UPDATE likes
-      SET count = GREATEST(likes.count - 1, 0)
-      WHERE slug = ${slug}
+      INSERT INTO likes (slug, count)
+      VALUES (${slug}, 1)
+      ON CONFLICT (slug)
+      DO UPDATE SET count = likes.count + 1
       RETURNING count
     `;
-    return NextResponse.json({ count: Number(result.rows[0]?.count ?? 0) });
+
+    return NextResponse.json({ count: Number(result.rows[0].count) });
+  } catch (error) {
+    console.error("Failed to save like:", error);
+    return NextResponse.json(
+      { error: "Failed to save like" },
+      { status: 500 }
+    );
   }
-
-  const result = await sql`
-    INSERT INTO likes (slug, count)
-    VALUES (${slug}, 1)
-    ON CONFLICT (slug)
-    DO UPDATE SET count = likes.count + 1
-    RETURNING count
-  `;
-
-  return NextResponse.json({ count: Number(result.rows[0].count) });
 }
