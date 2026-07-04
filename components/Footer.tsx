@@ -4,12 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import LikeButton from "@/components/LikeButton";
+import { siteConfig } from "@/lib/config";
 
-const links = [
-  { name: "@dotchirag", url: "https://x.com/dotchirag" },
-  { name: "github", url: "https://github.com/chiragdalmia" },
-  { name: "linkedin", url: "https://www.linkedin.com/in/chiragdalmia007" },
-];
+const links = siteConfig.social;
 
 export default function Footer() {
   const pathname = usePathname();
@@ -32,7 +29,9 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-blue-500 transition-colors duration-200"
                 >
-                  <span className="sr-only">Chirag Dalmia on {link.name}</span>
+                  <span className="sr-only">
+                    {siteConfig.author.name} on {link.name}
+                  </span>
                   {link.name}
                 </Link>
               </li>
