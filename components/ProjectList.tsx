@@ -1,4 +1,4 @@
-import type { Project } from "@/lib/projects";
+import type { Project } from "@/lib/config";
 import LikeButton from "@/components/LikeButton";
 
 export default function ProjectList({ projects }: { projects: Project[] }) {
