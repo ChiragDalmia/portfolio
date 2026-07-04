@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
+import { siteConfig } from "@/lib/config";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: { userAgent: "*", allow: "/" },
-    sitemap: "https://chiragdalmia.com/sitemap.xml",
+    sitemap: new URL("/sitemap.xml", siteConfig.site.url).href,
   };
 }
