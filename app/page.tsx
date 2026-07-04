@@ -1,9 +1,9 @@
-import { personalProjects, hackathonProjects } from "@/lib/projects";
-import Link from "next/link";
-import React from "react";
+import { siteConfig } from "@/lib/config";
 import type { Metadata } from "next";
 
 import ProjectList from "@/components/ProjectList";
+import ExperienceList from "@/components/ExperienceList";
+import RichText from "@/components/RichText";
 import Section from "@/components/Section";
 
 export const metadata: Metadata = {
@@ -12,110 +12,36 @@ export const metadata: Metadata = {
   },
 };
 
-const experienceData = [
-  {
-    dateRange: "Feb. 2025 - Mar. 2026",
-    prefix: "Fullstack Dev at ",
-    linkText: "Academy Petroleum Industries",
-    suffix: "",
-    url: "https://www.academypetroleum.com/",
-    description:
-      "Developing full stack solutions to streamline operations and internal tooling.",
-  },
-  {
-    dateRange: "Sep. 2024 - Dec. 2024",
-    prefix: "",
-    linkText: "HackCanada",
-    suffix: " Organiser (Front-end Dev)",
-    url: "https://staging.hackcanada.org/",
-    description:
-      "Helped Organize one of Canada's largest student-run hackathons with designing website, logistics, and everything in between.",
-  },
-  {
-    dateRange: "Mar. 2024 - Sep. 2024",
-    prefix: "Web Dev Intern at ",
-    linkText: "Sheridan College",
-    suffix: "",
-    url: "https://www.sheridancollege.ca/",
-    description:
-      "Building and maintaining web experiences for the college community.",
-  },
-];
+const { intro, personalHeading, hackathonHeading, experienceHeading, experience } =
+  siteConfig.home;
 
 const Page = () => {
   return (
     <>
       <section aria-labelledby="intro">
         <h1 id="intro" className="mt-0">
-          Hey, I&apos;m Chirag.
+          {intro.heading}
         </h1>
-        <p>
-          I&apos;m a Full Stack Developer who loves building{" "}
-          <Link href="/projects">cool web stuff</Link>. Lately, I&apos;ve been
-          obsessed with learning how large-scale companies design their
-          infra. I&apos;m always looking for opportunities to build, learn,
-          and contribute to exciting projects.
-        </p>
-        <p>
-          Got a fun project in mind? Let&apos;s team up. You can find me on{" "}
-          <Link href="https://www.linkedin.com/in/chiragdalmia007">
-            linkedin
-          </Link>{" "}
-          or drop a message in my <Link href="/guestlog">guestbook</Link>.
-        </p>
+        {intro.paragraphs.map((paragraph, i) => (
+          <p key={i}>
+            <RichText content={paragraph} />
+          </p>
+        ))}
       </section>
 
-      <Section title="Personal Projects">
-        <ProjectList projects={personalProjects} />
+      <Section title={personalHeading}>
+        <ProjectList projects={siteConfig.projects.personal} />
       </Section>
 
-      <Section title="Some of My Fav Hackathon Projects">
-        <ProjectList projects={hackathonProjects} />
+      <Section title={hackathonHeading}>
+        <ProjectList projects={siteConfig.projects.hackathon} />
       </Section>
 
-      <Section title="Experience">
-        <ul className="space-y-3">
-          {experienceData.map((experience) => (
-            <ExperienceEntry key={experience.linkText} {...experience} />
-          ))}
-        </ul>
+      <Section title={experienceHeading}>
+        <ExperienceList items={experience} />
       </Section>
     </>
   );
 };
-
-function ExperienceEntry({
-  dateRange,
-  prefix,
-  linkText,
-  suffix,
-  url,
-  description,
-}: {
-  dateRange?: string;
-  prefix?: string;
-  linkText: string;
-  suffix?: string;
-  url?: string;
-  description?: string;
-}) {
-  return (
-    <li className="ml-0">
-      <div className="flex items-baseline justify-between gap-4">
-        <span>
-          {prefix}
-          {url ? <Link href={url}>{linkText}</Link> : linkText}
-          {suffix}
-        </span>
-        {dateRange && (
-          <span className="text-xs text-muted-foreground whitespace-nowrap">
-            {dateRange}
-          </span>
-        )}
-      </div>
-      {description && <p className="mb-0">{description}</p>}
-    </li>
-  );
-}
 
 export default Page;
