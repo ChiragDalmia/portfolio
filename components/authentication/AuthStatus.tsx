@@ -1,6 +1,7 @@
 "use client";
 
 import { useSession, signIn, signOut } from "next-auth/react";
+import { siteConfig } from "@/lib/config";
 
 export function AuthStatus() {
   const { status } = useSession();
@@ -13,7 +14,9 @@ export function AuthStatus() {
         status === "loading" ? "invisible" : ""
       }`}
     >
-      Sign {status === "authenticated" ? "out" : "in"}
+      {status === "authenticated"
+        ? siteConfig.guestbook.signOutLabel
+        : siteConfig.guestbook.signInLabel}
     </button>
   );
 }

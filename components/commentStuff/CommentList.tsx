@@ -3,14 +3,17 @@ import TimeAgo from "./TimeAgo";
 import DeleteCommentButton from "./DeleteComment";
 import LikeButton from "@/components/LikeButton";
 import type { Comment } from "@/lib/comment-actions";
+import { siteConfig } from "@/lib/config";
 
 export default function Component({ comments }: { comments: Comment[] }) {
   return (
     <div className="space-y-4 p-4">
-      <h2 className="text-lg font-bold mb-4">Comments</h2>
+      <h2 className="text-lg font-bold mb-4">
+        {siteConfig.guestbook.commentsHeading}
+      </h2>
       {comments.length === 0 && (
         <p className="text-sm text-muted-foreground">
-          No comments yet — be the first to say hi!
+          {siteConfig.guestbook.emptyState}
         </p>
       )}
       <ul className="space-y-4">

@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useActionState } from "react";
 import { addComment, type CommentActionState } from "@/lib/comment-actions";
+import { siteConfig } from "@/lib/config";
 
 function SubmitButton({ isPending }: { isPending: boolean }) {
   return (
@@ -11,7 +12,9 @@ function SubmitButton({ isPending }: { isPending: boolean }) {
       className="absolute right-0 top-0 h-full px-4 transition-opacity disabled:opacity-50"
       disabled={isPending}
     >
-      {isPending ? "Posting..." : "Post"}
+      {isPending
+        ? siteConfig.guestbook.postingLabel
+        : siteConfig.guestbook.postLabel}
     </button>
   );
 }
@@ -43,7 +46,7 @@ export default function CommentForm() {
           <input
             name="content"
             className="w-full h-full bg-transparent px-4 py-2 pr-24 rounded-full focus:outline-hidden focus:ring-2 focus:ring-primary"
-            placeholder="Enter your comment..."
+            placeholder={siteConfig.guestbook.inputPlaceholder}
             maxLength={500}
             autoComplete="off"
             required
