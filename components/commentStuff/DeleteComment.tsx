@@ -3,7 +3,9 @@
 import { useActionState } from "react";
 import { deleteComment, type CommentActionState } from "@/lib/comment-actions";
 import { useSession } from "next-auth/react";
-import { ADMIN_USERNAME } from "@/lib/constants";
+import { siteConfig } from "@/lib/config";
+
+const ADMIN_USERNAME = siteConfig.author.githubUsername;
 
 type DeleteCommentButtonProps = {
   commentId: string;

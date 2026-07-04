@@ -3,7 +3,9 @@
 import { revalidatePath, updateTag, unstable_cache } from "next/cache";
 import { sql } from "@/lib/db";
 import { auth } from "@/lib/auth";
-import { ADMIN_USERNAME } from "@/lib/constants";
+import { siteConfig } from "@/lib/config";
+
+const ADMIN_USERNAME = siteConfig.author.githubUsername;
 
 export type Comment = {
   id: string;
