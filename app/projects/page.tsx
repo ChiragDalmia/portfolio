@@ -1,11 +1,14 @@
-import { personalProjects, hackathonProjects } from "@/lib/projects";
+import { siteConfig } from "@/lib/config";
 import type { Metadata } from "next";
 
 import ProjectList from "@/components/ProjectList";
 import Section from "@/components/Section";
 
+const { metaTitle, heading, personalHeading, hackathonHeading } =
+  siteConfig.projectsPage;
+
 export const metadata: Metadata = {
-  title: "Projects",
+  title: metaTitle,
 };
 
 export default function ProjectsPage() {
@@ -13,16 +16,16 @@ export default function ProjectsPage() {
     <>
       <section aria-labelledby="projects">
         <h1 id="projects" className="mt-0">
-          Projects
+          {heading}
         </h1>
       </section>
 
-      <Section title="Personal Projects">
-        <ProjectList projects={personalProjects} />
+      <Section title={personalHeading}>
+        <ProjectList projects={siteConfig.projects.personal} />
       </Section>
 
-      <Section title="Hackathon Projects">
-        <ProjectList projects={hackathonProjects} />
+      <Section title={hackathonHeading}>
+        <ProjectList projects={siteConfig.projects.hackathon} />
       </Section>
     </>
   );
