@@ -1,6 +1,7 @@
 {
   "name": "portfolio",
   "private": true,
+  "packageManager": "pnpm@11.10.0",
   "engines": {
     "node": "24.x"
   },
@@ -33,15 +34,5 @@
     "eslint-config-next": "16.2.9",
     "postcss": "^8.5.16",
     "typescript": "^6.0.3"
-  },
-  "pnpm": {
-    "overrides": {
-      "@types/react": "19.2.17",
-      "@types/react-dom": "19.2.3"
-    },
-    "onlyBuiltDependencies": [
-      "sharp",
-      "unrs-resolver"
-    ]
   }
 }
