@@ -1,11 +1,12 @@
 import Link from "next/link";
+import { siteConfig } from "@/lib/config";
 
 export default function NotFound() {
   return (
     <section>
-      <h1 className="mt-0">Page not found</h1>
-      <p>The page you&apos;re looking for doesn&apos;t exist (or moved).</p>
-      <Link href="/">Back to Home</Link>
+      <h1 className="mt-0">{siteConfig.notFound.heading}</h1>
+      <p>{siteConfig.notFound.body}</p>
+      <Link href="/">{siteConfig.notFound.backLabel}</Link>
     </section>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { siteConfig } from "@/lib/config";
 
 export default function Error({
   error,
@@ -15,13 +16,10 @@ export default function Error({
 
   return (
     <section>
-      <h1 className="mt-0">Something went wrong</h1>
-      <p>
-        An unexpected error occurred while loading this page. It&apos;s
-        probably temporary.
-      </p>
+      <h1 className="mt-0">{siteConfig.errorPage.heading}</h1>
+      <p>{siteConfig.errorPage.body}</p>
       <button type="button" onClick={reset}>
-        Try again
+        {siteConfig.errorPage.retryLabel}
       </button>
     </section>
   );
