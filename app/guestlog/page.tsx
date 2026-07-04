@@ -2,10 +2,11 @@ import { AuthStatus } from "@/components/authentication/AuthStatus";
 import CommentSection from "@/components/commentStuff/CommentSection";
 import { unstable_noStore } from "next/cache";
 import type { Metadata } from "next";
+import { siteConfig } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: "Guestlog",
-  description: "Sign the guestbook — leave a comment and say hi.",
+  title: siteConfig.guestlog.metaTitle,
+  description: siteConfig.guestlog.metaDescription,
 };
 
 export default async function Page() {
