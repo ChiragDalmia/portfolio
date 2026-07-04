@@ -7,32 +7,31 @@ import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
 import Footer from "@/components/Footer";
 import { Providers } from "@/components/providers";
+import { siteConfig } from "@/lib/config";
 
 const inter = Inter({ subsets: ["latin"] });
 
 // The canonical URL is set per page (see app/page.tsx); putting it here
 // would mark every page as a duplicate of the homepage.
 export const metadata: Metadata = {
-  metadataBase: new URL("https://chiragdalmia.com"),
+  metadataBase: new URL(siteConfig.site.url),
   title: {
-    default: "Chirag Dalmia | Full Stack Developer",
-    template: "%s | Chirag Dalmia",
+    default: siteConfig.seo.title,
+    template: siteConfig.seo.titleTemplate,
   },
-  description:
-    "Portfolio of Chirag Dalmia, a Full Stack Developer specializing in modern web technologies.",
+  description: siteConfig.seo.description,
   // og:image comes from the app/opengraph-image.png file convention.
   openGraph: {
-    siteName: "Chirag Dalmia",
-    url: "https://chiragdalmia.com",
+    siteName: siteConfig.seo.ogSiteName,
+    url: siteConfig.site.url,
     type: "website",
-    title: "Chirag Dalmia | Full Stack Developer",
-    description:
-      "Portfolio of Chirag Dalmia, a Full Stack Developer specializing in modern web technologies.",
+    title: siteConfig.seo.title,
+    description: siteConfig.seo.description,
   },
   twitter: {
     card: "summary_large_image",
-    site: "@dotchirag",
-    creator: "@dotchirag",
+    site: siteConfig.seo.twitterHandle,
+    creator: siteConfig.seo.twitterHandle,
   },
 };
 
@@ -60,15 +59,11 @@ export default function RootLayout({
             <header className="max-w-[70ch] mx-auto w-full relative flex items-center justify-between">
               <nav aria-label="Main navigation">
                 <ul className="flex gap-4 text-sm list-none m-0 p-0">
-                  <li className="m-0">
-                    <Link href="/">home</Link>
-                  </li>
-                  <li className="m-0">
-                    <Link href="/projects">projects</Link>
-                  </li>
-                  <li className="m-0">
-                    <Link href="/guestlog">guestlog</Link>
-                  </li>
+                  {siteConfig.nav.map((item) => (
+                    <li key={item.href} className="m-0">
+                      <Link href={item.href}>{item.name}</Link>
+                    </li>
+                  ))}
                 </ul>
               </nav>
               <ThemeToggle />
