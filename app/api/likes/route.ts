@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { sql } from "@/lib/db";
-import { personalProjects, hackathonProjects } from "@/lib/projects";
+import { siteConfig } from "@/lib/config";
 
 const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
 const MAX_REQUESTS = 30;
@@ -8,7 +8,9 @@ const MAX_SLUGS_PER_QUERY = 100;
 
 // Only known entities can be liked: the site footer, a real project, or a comment.
 const PROJECT_SLUGS = new Set(
-  [...personalProjects, ...hackathonProjects].map((p) => `project:${p.name}`)
+  [...siteConfig.projects.personal, ...siteConfig.projects.hackathon].map(
+    (p) => `project:${p.name}`
+  )
 );
 const COMMENT_SLUG =
   /^comment:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
