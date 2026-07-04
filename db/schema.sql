@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS comments (
 
 -- Aggregate like counts, one row per liked entity. Slug namespaces:
 --   'site'            -> footer/site like button
---   'project:<name>'  -> project likes (names from lib/projects.ts)
+--   'project:<name>'  -> project likes (names from lib/config.ts)
 --   'comment:<uuid>'  -> comment likes (row deleted with the comment)
 -- One-like-per-visitor is enforced on the device via localStorage, so no
 -- per-visitor rows are needed here.
