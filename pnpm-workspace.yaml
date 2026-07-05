@@ -1,6 +1,9 @@
 overrides:
   "@types/react": 19.2.17
   "@types/react-dom": 19.2.3
+  # next pins postcss 8.4.31, which has a moderate advisory (GHSA-qx2v-qp2m-jg93,
+  # fixed in 8.5.10). postcss 8.x is semver-compatible, so force the patched line.
+  "postcss@<8.5.10": ">=8.5.10"
 
 onlyBuiltDependencies:
   - sharp

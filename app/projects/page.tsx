@@ -4,11 +4,15 @@ import type { Metadata } from "next";
 import ProjectList from "@/components/ProjectList";
 import Section from "@/components/Section";
 
-const { metaTitle, heading, personalHeading, hackathonHeading } =
+const { metaTitle, metaDescription, heading, personalHeading, hackathonHeading } =
   siteConfig.projectsPage;
 
 export const metadata: Metadata = {
   title: metaTitle,
+  description: metaDescription,
+  alternates: {
+    canonical: "/projects",
+  },
 };
 
 export default function ProjectsPage() {

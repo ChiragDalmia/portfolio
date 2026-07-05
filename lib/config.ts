@@ -6,7 +6,7 @@
 // personal is hardcoded in the components — change a value here and it updates
 // everywhere it's used.
 //
-// (Also replace the images at app/opengraph-image.png and app/favicon.ico, and
+// (Also replace the images at app/opengraph-image.jpg and app/favicon.ico, and
 // fill in .env.local — see the README.)
 // =============================================================================
 
@@ -52,8 +52,9 @@ export const siteConfig = {
   // --- Your site -------------------------------------------------------------
   site: {
     // Production URL, no trailing slash. Used for canonical links, sitemap,
-    // robots.txt and Open Graph metadata.
-    url: "https://chiragdalmia.com",
+    // robots.txt and Open Graph metadata. Must match the host the site is
+    // actually served from (Vercel 308-redirects the apex to www).
+    url: "https://www.chiragdalmia.com",
   },
 
   // --- Search-engine / social-share metadata ---------------------------------
@@ -121,7 +122,7 @@ export const siteConfig = {
         prefix: "",
         linkText: "HackCanada",
         suffix: " Organiser (Front-end Dev)",
-        url: "https://staging.hackcanada.org/",
+        url: "https://hackcanada.org/",
         description:
           "Helped Organize one of Canada's largest student-run hackathons with designing website, logistics, and everything in between.",
       },
@@ -140,6 +141,8 @@ export const siteConfig = {
   // --- Projects page ---------------------------------------------------------
   projectsPage: {
     metaTitle: "Projects",
+    metaDescription:
+      "Personal and hackathon projects built by Chirag Dalmia — full stack web apps, AI tools, and AR experiments.",
     heading: "Projects",
     personalHeading: "Personal Projects",
     hackathonHeading: "Hackathon Projects",

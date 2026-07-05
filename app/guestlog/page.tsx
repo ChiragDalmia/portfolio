@@ -7,6 +7,9 @@ import { siteConfig } from "@/lib/config";
 export const metadata: Metadata = {
   title: siteConfig.guestlog.metaTitle,
   description: siteConfig.guestlog.metaDescription,
+  alternates: {
+    canonical: "/guestlog",
+  },
 };
 
 export default async function Page() {
@@ -15,6 +18,9 @@ export default async function Page() {
 
   return (
     <section className="relative">
+      {/* Visually hidden: gives the page an h1 (the visible content starts at
+          the "Comments" h2) without changing the layout. */}
+      <h1 className="sr-only">{siteConfig.guestlog.metaTitle}</h1>
       <AuthStatus />
       <CommentSection />
     </section>

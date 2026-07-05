@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: siteConfig.seo.titleTemplate,
   },
   description: siteConfig.seo.description,
-  // og:image comes from the app/opengraph-image.png file convention.
+  // og:image comes from the app/opengraph-image.jpg file convention.
   openGraph: {
     siteName: siteConfig.seo.ogSiteName,
     url: siteConfig.site.url,

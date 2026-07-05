@@ -8,7 +8,7 @@ A minimal, fast personal portfolio built with Next.js (App Router), Tailwind CSS
 
 Then replace two images with your own (keep the filenames):
 
-- `app/opengraph-image.png` — the social-share preview image
+- `app/opengraph-image.jpg` — the social-share preview image
 - `app/favicon.ico` — the browser tab icon
 
 What each section of `lib/config.ts` controls:
@@ -21,7 +21,7 @@ What each section of `lib/config.ts` controls:
 | `nav` | Header navigation links (also builds the sitemap) |
 | `social` | Footer social links |
 | `home` | Intro heading + bio, project section headings, and the Experience list |
-| `projectsPage` | Titles/headings for the `/projects` page |
+| `projectsPage` | `/projects` page title, meta description, and headings |
 | `guestlog` | `/guestlog` page title + description |
 | `projects` | Your `personal` and `hackathon` project lists (shown on both pages) |
 | `guestbook` | Guestbook UI labels (Comments heading, empty state, input, buttons, sign in/out) |

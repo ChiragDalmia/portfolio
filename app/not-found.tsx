@@ -1,5 +1,10 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { siteConfig } from "@/lib/config";
+
+export const metadata: Metadata = {
+  title: siteConfig.notFound.heading,
+};
 
 export default function NotFound() {
   return (
