@@ -18,6 +18,7 @@ function ExperienceEntry({
   suffix,
   url,
   description,
+  highlights,
 }: ExperienceItem) {
   return (
     <li className="ml-0">
@@ -34,6 +35,13 @@ function ExperienceEntry({
         )}
       </div>
       {description && <p className="mb-0">{description}</p>}
+      {highlights && (
+        <ul className="list-disc mt-1 mb-0 space-y-1">
+          {highlights.map((highlight) => (
+            <li key={highlight}>{highlight}</li>
+          ))}
+        </ul>
+      )}
     </li>
   );
 }

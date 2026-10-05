@@ -15,9 +15,25 @@ export const metadata: Metadata = {
 const { intro, personalHeading, hackathonHeading, experienceHeading, experience } =
   siteConfig.home;
 
+// Person structured data so search engines can connect the name, role,
+// employer and social profiles. "<" is escaped so the JSON can't close the tag.
+const personJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: siteConfig.author.name,
+  jobTitle: siteConfig.author.role,
+  url: siteConfig.site.url,
+  worksFor: { "@type": "Organization", ...siteConfig.author.worksFor },
+  sameAs: siteConfig.social.map((s) => s.url),
+}).replace(/</g, "\\u003c");
+
 const Page = () => {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: personJsonLd }}
+      />
       <section aria-labelledby="intro">
         <h1 id="intro" className="mt-0">
           {intro.heading}

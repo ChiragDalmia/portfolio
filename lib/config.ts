@@ -29,6 +29,7 @@ export type Project = {
 // One row in the Experience list. Only `linkText` is required. The line reads:
 //   {prefix}{linkText}{suffix}          {dateRange}
 //   {description}
+//   • {highlights}
 // `linkText` becomes a link when `url` is set, otherwise it's plain text.
 export type ExperienceItem = {
   dateRange?: string;
@@ -37,6 +38,7 @@ export type ExperienceItem = {
   suffix?: string;
   url?: string;
   description?: string;
+  highlights?: string[];
 };
 
 export const siteConfig = {
@@ -47,6 +49,8 @@ export const siteConfig = {
     // Your GitHub username. This person is the guestbook admin and can delete
     // any comment. Sign in to the guestbook with this GitHub account.
     githubUsername: "ChiragDalmia",
+    // Current employer, added to the homepage's structured data (JSON-LD).
+    worksFor: { name: "We Know Training", url: "https://wkt.ca/" },
   },
 
   // --- Your site -------------------------------------------------------------
@@ -64,7 +68,7 @@ export const siteConfig = {
     // Template for other pages; %s is replaced by that page's title.
     titleTemplate: "%s | Chirag Dalmia",
     description:
-      "Portfolio of Chirag Dalmia, a Full Stack Developer specializing in modern web technologies.",
+      "Chirag Dalmia is a Full Stack Developer building with Next.js, React and TypeScript. Currently at We Know Training (WKT). See projects, hackathon builds and experience.",
     ogSiteName: "Chirag Dalmia",
     // Your X/Twitter handle, including the leading @.
     twitterHandle: "@dotchirag",
@@ -91,9 +95,14 @@ export const siteConfig = {
       // Each entry is one paragraph. See the RichText note above for links.
       paragraphs: [
         [
-          "I'm a Full Stack Developer who loves building ",
+          "I'm Chirag Dalmia, a Full Stack Developer who loves building ",
           { text: "cool web stuff", href: "/projects" },
-          ". Lately, I've been obsessed with learning how large-scale companies design their infra. I'm always looking for opportunities to build, learn, and contribute to exciting projects.",
+          ", mostly with Next.js, React and TypeScript. These days I'm at ",
+          { text: "We Know Training (WKT)", href: "https://wkt.ca/" },
+          ", working on the team's websites, from responsive UI and animation to analytics and technical SEO.",
+        ],
+        [
+          "Outside work, I'm still obsessed with how large-scale companies design their infra, and always up for building, learning, and contributing to exciting projects.",
         ],
         [
           "Got a fun project in mind? Let's team up. You can find me on ",
@@ -109,13 +118,17 @@ export const siteConfig = {
     experienceHeading: "Experience",
     experience: [
       {
-        dateRange: "Feb. 2025 - Mar. 2026",
-        prefix: "Fullstack Dev at ",
-        linkText: "Academy Petroleum Industries",
-        suffix: "",
-        url: "https://www.academypetroleum.com/",
+        dateRange: "Jul. 2026 - Present",
+        prefix: "Frontend Developer at ",
+        linkText: "We Know Training (WKT)",
+        url: "https://wkt.ca/",
         description:
-          "Developing full stack solutions to streamline operations and internal tooling.",
+          "Currently working with the WKT team on frontend, animation, analytics and SEO across its family of websites.",
+        highlights: [
+          "Worked on WKT's Next.js website: responsive interfaces, product storytelling, animation and the Cloudflare launch.",
+          "Contributed frontend improvements, content updates and technical SEO to the Relo and Business Career College sites.",
+          "Worked on GA4/GTM event tracking and contact/newsletter form integrations, and created HTML/CSS/SVG explainer animations for ReadyEngine.",
+        ],
       },
       {
         dateRange: "Sep. 2024 - Dec. 2024",
