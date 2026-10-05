@@ -1,19 +1,18 @@
 import { siteConfig } from "@/lib/config";
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 
 import ProjectList from "@/components/ProjectList";
+import RichText from "@/components/RichText";
 import Section from "@/components/Section";
 
-const { metaTitle, metaDescription, heading, personalHeading, hackathonHeading } =
+const { metaTitle, metaDescription, heading, intro, personalHeading, hackathonHeading } =
   siteConfig.projectsPage;
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: metaTitle,
   description: metaDescription,
-  alternates: {
-    canonical: "/projects",
-  },
-};
+  path: "/projects",
+});
 
 export default function ProjectsPage() {
   return (
@@ -22,6 +21,9 @@ export default function ProjectsPage() {
         <h1 id="projects" className="mt-0">
           {heading}
         </h1>
+        <p>
+          <RichText content={intro} />
+        </p>
       </section>
 
       <Section title={personalHeading}>

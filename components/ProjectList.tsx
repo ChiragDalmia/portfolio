@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Project } from "@/lib/config";
 import LikeButton from "@/components/LikeButton";
 
@@ -11,23 +12,35 @@ export default function ProjectList({ projects }: { projects: Project[] }) {
   );
 }
 
-function ProjectEntry({ name, url, githubUrl, description }: Project) {
+const external = { target: "_blank", rel: "noopener noreferrer" } as const;
+const muted = "text-xs text-muted-foreground whitespace-nowrap";
+
+function ProjectEntry({ name, url, githubUrl, description, caseStudy }: Project) {
   const showSource = githubUrl && githubUrl !== url;
   return (
     <li className="ml-0 group">
-      <a href={url} target="_blank" rel="noopener noreferrer">
-        {name}
-      </a>
+      {/* With a case study the name links to it, and the live demo moves to
+          its own small link; otherwise the name links straight to the demo. */}
+      {caseStudy ? (
+        <Link href={`/projects/${caseStudy}`}>{name}</Link>
+      ) : (
+        <a href={url} {...external}>
+          {name}
+        </a>
+      )}
       {description && <> - {description}</>}
-      {showSource && (
+      {caseStudy && url !== githubUrl && (
         <>
           {" "}
-          <a
-            href={githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs text-muted-foreground whitespace-nowrap"
-          >
+          <a href={url} {...external} className={muted}>
+            (Live)
+          </a>
+        </>
+      )}
+      {(showSource || (caseStudy && githubUrl)) && (
+        <>
+          {" "}
+          <a href={githubUrl} {...external} className={muted}>
             (Github)
           </a>
         </>

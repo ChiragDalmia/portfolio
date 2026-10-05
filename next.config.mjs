@@ -38,6 +38,17 @@ const nextConfig = {
       },
     ],
   },
+  // Old v1 project URL that is still indexed; the same write-up now lives at
+  // /projects/quicture. (The other v1 slugs are reused as-is.)
+  async redirects() {
+    return [
+      {
+        source: "/projects/a-fast-anonymous-photo-sharing-platform-using-peer",
+        destination: "/projects/quicture",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

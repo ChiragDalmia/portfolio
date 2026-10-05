@@ -15,7 +15,7 @@ What each section of `lib/config.ts` controls:
 
 | Section | Controls |
 | --- | --- |
-| `author` | Your name, role, and GitHub username (the guestbook admin who can delete any comment) |
+| `author` | Your name, role, GitHub username (the guestbook admin who can delete any comment), employer, bio, skills and extra profiles for structured data |
 | `site` | Your production URL (used for canonical links, sitemap, robots, Open Graph) |
 | `seo` | Page/share title, title template, description, Open Graph site name, X/Twitter handle |
 | `nav` | Header navigation links (also builds the sitemap) |
@@ -23,7 +23,9 @@ What each section of `lib/config.ts` controls:
 | `home` | Intro heading + bio, project section headings, and the Experience list |
 | `projectsPage` | `/projects` page title, meta description, and headings |
 | `guestlog` | `/guestlog` page title + description |
-| `projects` | Your `personal` and `hackathon` project lists (shown on both pages) |
+| `projects` | Your `personal` and `hackathon` project lists (shown on both pages). Set `caseStudy` to link a project to its write-up |
+| `caseStudies` | Project write-ups served at `/projects/<key>` and listed in the sitemap. Bump `updated` when you edit one |
+| `caseStudyPage` | Labels on the case study pages |
 | `guestbook` | Guestbook UI labels (Comments heading, empty state, input, buttons, sign in/out) |
 | `errorPage` / `notFound` | Copy for the error and 404 pages |
 

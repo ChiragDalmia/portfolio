@@ -1,16 +1,14 @@
 import { AuthStatus } from "@/components/authentication/AuthStatus";
 import CommentSection from "@/components/commentStuff/CommentSection";
 import { unstable_noStore } from "next/cache";
-import type { Metadata } from "next";
 import { siteConfig } from "@/lib/config";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: siteConfig.guestlog.metaTitle,
+export const metadata = pageMetadata({
+  title: `${siteConfig.guestlog.metaTitle} | ${siteConfig.author.name}`,
   description: siteConfig.guestlog.metaDescription,
-  alternates: {
-    canonical: "/guestlog",
-  },
-};
+  path: "/guestlog",
+});
 
 export default async function Page() {
   // Opt out of static rendering

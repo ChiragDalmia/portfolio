@@ -1,38 +1,46 @@
+import Link from "next/link";
 import { siteConfig } from "@/lib/config";
-import type { Metadata } from "next";
+import { pageMetadata, person, personId, website, websiteId } from "@/lib/seo";
 
+import JsonLd from "@/components/JsonLd";
 import ProjectList from "@/components/ProjectList";
 import ExperienceList from "@/components/ExperienceList";
 import RichText from "@/components/RichText";
 import Section from "@/components/Section";
 
-export const metadata: Metadata = {
-  alternates: {
-    canonical: "/",
-  },
-};
+export const metadata = pageMetadata({
+  title: siteConfig.seo.title,
+  description: siteConfig.seo.description,
+  path: "/",
+});
 
-const { intro, personalHeading, hackathonHeading, experienceHeading, experience } =
-  siteConfig.home;
-
-// Person structured data so search engines can connect the name, role,
-// employer and social profiles. "<" is escaped so the JSON can't close the tag.
-const personJsonLd = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: siteConfig.author.name,
-  jobTitle: siteConfig.author.role,
-  url: siteConfig.site.url,
-  worksFor: { "@type": "Organization", ...siteConfig.author.worksFor },
-  sameAs: siteConfig.social.map((s) => s.url),
-}).replace(/</g, "\\u003c");
+const {
+  intro,
+  personalHeading,
+  hackathonHeading,
+  allProjectsLabel,
+  experienceHeading,
+  experience,
+} = siteConfig.home;
 
 const Page = () => {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: personJsonLd }}
+      {/* ProfilePage → Person so search engines can tell this Chirag Dalmia
+          apart from others with the same name (role, employer, profiles). */}
+      <JsonLd
+        graph={[
+          website,
+          {
+            "@type": "ProfilePage",
+            "@id": `${siteConfig.site.url}/#profilepage`,
+            url: siteConfig.site.url,
+            name: siteConfig.seo.title,
+            isPartOf: { "@id": websiteId },
+            mainEntity: { "@id": personId },
+          },
+          person,
+        ]}
       />
       <section aria-labelledby="intro">
         <h1 id="intro" className="mt-0">
@@ -51,6 +59,9 @@ const Page = () => {
 
       <Section title={hackathonHeading}>
         <ProjectList projects={siteConfig.projects.hackathon} />
+        <p className="mt-4 mb-0 text-sm">
+          <Link href="/projects">{allProjectsLabel}</Link>
+        </p>
       </Section>
 
       <Section title={experienceHeading}>

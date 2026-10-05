@@ -19,6 +19,7 @@ function ExperienceEntry({
   url,
   description,
   highlights,
+  caseStudy,
 }: ExperienceItem) {
   return (
     <li className="ml-0">
@@ -27,6 +28,17 @@ function ExperienceEntry({
           {prefix}
           {url ? <Link href={url}>{linkText}</Link> : linkText}
           {suffix}
+          {caseStudy && (
+            <>
+              {" "}
+              <Link
+                href={`/projects/${caseStudy}`}
+                className="text-xs text-muted-foreground whitespace-nowrap"
+              >
+                (case study)
+              </Link>
+            </>
+          )}
         </span>
         {dateRange && (
           <span className="text-xs text-muted-foreground whitespace-nowrap">
